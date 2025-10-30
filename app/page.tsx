@@ -3,39 +3,23 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from "@/components/ui/badge"
 import { TechnologyBadge } from "@/components/ui/technology-badge"
 import { ArrowRight, Github, Linkedin, Mail, ExternalLink, Code, Database, Globe } from "lucide-react"
+import { Navigation } from "@/components/navigation"
 import {
   PERSONAL_INFO,
-  NAVIGATION,
   CONTACT_INFO,
   FEATURED_PROJECTS,
   TECHNICAL_SKILLS,
   LEADERSHIP_SKILLS,
   TECHNICAL_INTERESTS,
   TECHNICAL_INTERESTS_DESCRIPTION,
+  EXECUTIVE_SUMMARY,
 } from "@/lib/constants"
 
 export default function Portfolio() {
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation */}
-      <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
-        <div className="max-w-6xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="font-serif text-xl font-semibold text-accent">Portfolio</div>
-            <div className="hidden md:flex items-center gap-8">
-              {NAVIGATION.items.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  {item.label}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navigation />
 
       {/* Hero Section */}
       <section className="py-20 px-6">
@@ -58,20 +42,23 @@ export default function Portfolio() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button
               size="lg"
-              className="group bg-primary hover:bg-secondary text-primary-foreground hover:text-secondary-foreground px-8 py-3 transition-all duration-300 hover:shadow-lg"
+              className="group bg-primary hover:bg-secondary text-primary-foreground hover:text-secondary-foreground px-4 py-3 transition-all duration-300 hover:shadow-lg"
               asChild
             >
               <a href="#projects">
-                View My Work
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                View Work
+                <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </a>
             </Button>
             <Button
               variant="outline"
               size="lg"
-              className="px-8 py-3 border-accent hover:bg-accent hover:text-accent-foreground transition-all duration-300 bg-transparent"
+              className="px-4 py-3 border-accent hover:bg-accent hover:text-accent-foreground transition-all duration-300 bg-transparent"
+              asChild
             >
-              Download Resume
+              <a href="#skills">
+                Learn More
+              </a>
             </Button>
           </div>
 
@@ -111,48 +98,24 @@ export default function Portfolio() {
           <Card className="border-border bg-card shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
             <CardContent className="p-8">
               <div className="grid md:grid-cols-3 gap-8 mb-8">
-                <div className="text-center">
-                  <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center hover:bg-accent/20 transition-all duration-300 group">
-                    <Code className="w-8 h-8 text-primary group-hover:text-accent transition-colors duration-300" />
-                  </div>
-                  <h4 className="font-semibold mb-2 text-card-foreground">Platform Engineering</h4>
-                  <p className="text-sm text-secondary leading-relaxed">
-                    Creating strategic platforms that abstract technical complexity and provide engineering teams with
-                    greater autonomy
-                  </p>
-                </div>
-                <div className="text-center">
-                  <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center hover:bg-accent/20 transition-all duration-300 group">
-                    <Database className="w-8 h-8 text-primary group-hover:text-accent transition-colors duration-300" />
-                  </div>
-                  <h4 className="font-semibold mb-2 text-card-foreground">Cloud Architecture</h4>
-                  <p className="text-sm text-secondary leading-relaxed">
-                    Designing hybrid and multi-cloud environments with focus on automation, security, and developer
-                    experience
-                  </p>
-                </div>
-                <div className="text-center">
-                  <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center hover:bg-accent/20 transition-all duration-300 group">
-                    <Globe className="w-8 h-8 text-primary group-hover:text-accent transition-colors duration-300" />
-                  </div>
-                  <h4 className="font-semibold mb-2 text-card-foreground">Technical Leadership</h4>
-                  <p className="text-sm text-secondary leading-relaxed">
-                    Leading cross-functional teams and promoting internal adoption of platform solutions for
-                    sustainable value
-                  </p>
-                </div>
+                {EXECUTIVE_SUMMARY.expertiseAreas.map((area) => {
+                  const IconComponent = area.icon === "Code" ? Code : area.icon === "Database" ? Database : Globe
+                  return (
+                    <div key={area.title} className="text-center">
+                      <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center hover:bg-accent/20 transition-all duration-300 group">
+                        <IconComponent className="w-8 h-8 text-primary group-hover:text-accent transition-colors duration-300" />
+                      </div>
+                      <h4 className="font-semibold mb-2 text-card-foreground">{area.title}</h4>
+                      <p className="text-sm text-secondary leading-relaxed">{area.description}</p>
+                    </div>
+                  )
+                })}
               </div>
               <div className="text-center">
-                <p className="text-card-foreground leading-relaxed max-w-3xl mx-auto">
-                  As an experienced Cloud Developer and Enterprise Solutions Architect, I create powerful developer
-                  platforms that unite excellent Developer Experience, Self-Service architectures, and consistent
-                  Product Thinking. With deep expertise in software development, continuous delivery, DevOps, and IT
-                  Infrastructure Engineering, I focus on comprehensive automation and intuitive self-service mechanisms.
-                  I view platforms as strategic products that purposefully abstract technical complexity and provide
-                  engineering teams with greater autonomy, enabling them to focus on high-quality software development
-                  and data processing.
-            </p>
-          </div>
+                <p className="text-card-foreground leading-relaxed max-w-3xl mx-auto whitespace-pre-line">
+                  {EXECUTIVE_SUMMARY.mainText}
+                </p>
+              </div>
             </CardContent>
           </Card>
         </div>
@@ -170,7 +133,7 @@ export default function Portfolio() {
             {FEATURED_PROJECTS.map((project) => (
               <Card
                 key={project.slug}
-                className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-border bg-card"
+                className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-border bg-card flex flex-col"
               >
               <CardHeader>
                 <CardTitle className="font-serif text-xl text-card-foreground">
@@ -178,7 +141,7 @@ export default function Portfolio() {
                 </CardTitle>
                   <CardDescription className="text-secondary">{project.description}</CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="flex-1">
                   <p className="text-sm text-card-foreground leading-relaxed mb-4">{project.content}</p>
                 <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech) => (
@@ -186,10 +149,12 @@ export default function Portfolio() {
                     ))}
                 </div>
               </CardContent>
-              <CardFooter>
-                <Button variant="ghost" className="group/btn p-0 h-auto text-accent hover:text-accent/80 font-medium">
-                  Read Case Study
-                  <ExternalLink className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+              <CardFooter className="mt-auto">
+                <Button variant="link" className="group/btn p-0 h-auto text-accent hover:text-accent/80 font-medium" asChild>
+                  <a href={`/case-studies/${project.slug}`}>
+                    Read Case Study
+                    <ExternalLink className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                  </a>
                 </Button>
               </CardFooter>
             </Card>
@@ -259,7 +224,7 @@ export default function Portfolio() {
             {TECHNICAL_INTERESTS.map((interest) => (
               <Card
                 key={interest.title}
-                className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-border bg-card"
+                className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-border bg-card flex flex-col"
               >
               <CardHeader>
                 <CardTitle className="font-serif text-xl text-card-foreground">
@@ -267,7 +232,7 @@ export default function Portfolio() {
                 </CardTitle>
                   <CardDescription className="text-secondary">{interest.description}</CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="flex-1">
                   <p className="text-sm text-card-foreground leading-relaxed mb-4">{interest.content}</p>
                 <div className="flex flex-wrap gap-2">
                     {interest.technologies.map((tech) => (

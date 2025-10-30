@@ -1,8 +1,11 @@
+// Import Featured Projects from case-studies
+import { getFeaturedProjects } from "./case-studies"
+
 // Personal Information
 export const PERSONAL_INFO = {
   name: "Erik  Baer",
-  title: "Senior Platform Engineer & Tech Lead",
-  shortDescription: "Experienced Cloud Developer and Enterprise Solutions Architect creating powerful developer platforms that unite excellent Developer Experience, Self-Service architectures, and consistent Product Thinking. Specializing in comprehensive automation and intuitive self-service mechanisms for rapid iterations, high productivity, security, and stability.",
+  title: "Platform Engineer & Tech Lead",
+  shortDescription: "Experienced Cloud Developer and Enterprise Solutions Architect with a background in Strategic Management, creating powerful Developer Platforms that unite excellent Developer Experience, Self-service Architectures, and a focus on Product Thinking, in order to generate lasting business impact.",
   availability: "Available for new opportunities",
 } as const
 
@@ -18,6 +21,7 @@ export const NAVIGATION = {
   items: [
     { label: "About", href: "#about" },
     { label: "Projects", href: "#projects" },
+    { label: "Case Studies", href: "/case-studies" },
     { label: "Skills", href: "#skills" },
     { label: "Interests", href: "#interests" },
     { label: "Contact", href: "#contact" },
@@ -31,135 +35,89 @@ export const CONTACT_INFO = {
   github: "https://github.com/alexthompson",
 } as const
 
-// Featured Projects
-export const FEATURED_PROJECTS = [
-  {
-    title: "Digital Transformation for Global Enterprises",
-    description: "Leading modernization initiatives for Fortune 500 companies",
-    content:
-      "Leading modernization initiatives for Fortune 500 companies across Automotive, Transportation, Finance, and Healthcare sectors. Architected hybrid and multi-cloud environments with focus on Engineering Platforms, continuous delivery, and Developer Experience. Delivered strategic consulting to business decision-makers and technical leadership.",
-    technologies: ["AWS", "Azure", "Kubernetes", "Terraform", "GitLab CI", "Platform Engineering"],
-    slug: "digital-transformation-global-enterprises",
-  },
-  {
-    title: "Smart Home IoT Platform - Smirror",
-    description: "Complete IoT fitness platform with AI-powered movement feedback",
-    content:
-      "Architected and developed a complete IoT fitness platform featuring single-board computers with custom Linux OS, real-time 3D motion capturing with AI-powered movement feedback, and event-driven microservice architecture. Implemented fleet management via AWS IoT Core with OTA updates and automated deployment across device groups.",
-    technologies: ["AWS IoT Core", "Linux", "Microservices", "CI/CD", "Real-time Processing", "3D Motion Capture"],
-    slug: "smart-home-iot-platform-smirror",
-  },
-  {
-    title: "Financial Services Cloud Migration",
-    description: "Hybrid cloud architecture for financial services provider",
-    content:
-      "Led technical migration of a financial services provider to a hybrid bare-metal and high-availability cloud architecture. Optimized system architecture with specialized IBM storage and database solutions. Implemented comprehensive observability platform for international insurance company with full Infrastructure as Code approach.",
-    technologies: ["IBM Storage", "Terraform", "Observability", "Cloud Architecture", "Financial Services"],
-    slug: "financial-services-cloud-migration",
-  },
-  {
-    title: "Solar Cadastre 3D Analysis Platform",
-    description: "Solar potential analysis system with 3D modeling",
-    content:
-      "Developed innovative solar potential analysis system based on 3D laser scan models with minute-accurate solar irradiation simulation. Created comprehensive API backend for interactive web portal serving citizens across multiple city areas. Later expanded regionally by Regionalverband Ruhr into their official solar cadastre offering.",
-    technologies: ["3D Modeling", "Solar Simulation", "API Development", "GIS", "Web Portal", "Data Analysis"],
-    slug: "solar-cadastre-3d-analysis-platform",
-  },
-] as const
+// Featured Projects - imported from case-studies.ts
+export const FEATURED_PROJECTS = getFeaturedProjects()
+
+// Executive Summary
+export const EXECUTIVE_SUMMARY = {
+  expertiseAreas: [
+    {
+      title: "Platform Engineering",
+      description: "Creating compelling solutions that unlock productivity while improving developer satisfaction",
+      icon: "Code",
+    },
+    {
+      title: "Cloud Architecture",
+      description: "Designing hybrid and multi-cloud environments with focus on automation and best practices",
+      icon: "Database",
+    },
+    {
+      title: "Technical Leadership",
+      description: "Leading cross-functional teams and strategic adoption of platform solutions across organisations",
+      icon: "Globe",
+    }
+  ],
+  mainText: "My work efficiently combines deep expertise in Software Development and Continuous Delivery, DevOps, as well as IT Infrastructure Engineering, with an considerable experience in Strategic Business Development. This mindset is complimented by my strong drive to create impactful business value across complex organisations. I consider platforms as strategic products, that purposefully abstract technical complexity and provide engineering teams with greater autonomy, enabling them to focus on high-quality software development and efficient value creation.",
+} as const
 
 // Technical Skills Categories
 export const TECHNICAL_SKILLS = [
   {
     title: "Cloud Development",
-    technologies: ["Microsoft Azure", "Amazon Web Services", "Multi-Cloud", "Hybrid Cloud", "Landing Zones"],
+    technologies: ["MS Azure","AWS","IBM Cloud","Multi-Cloud","Hybrid Cloud","Managed Services","Serverless","Javascript","Python","Go","Bash"],
   },
   {
     title: "Platform Engineering",
-    technologies: [
-      "Kubernetes",
-      "Service Mesh",
-      "Istio",
-      "Container Orchestration",
-      "Engineering Platforms",
-      "Developer Experience",
-    ],
+    technologies: ["Kubernetes","Service Mesh","Istio","Helm","Kustomize","Docker","Backstage","Humanitec","ELK","Grafana","DataDog","Opentrace"],
   },
   {
     title: "Continuous Delivery",
-    technologies: ["Infrastructure as Code", "Terraform", "CI/CD", "GitLab CI", "Continuous Delivery", "Observability"],
+    technologies: ["Infrastructure as Code","Terraform","Continous Integration","GitLab CI","Github Actions","Azure DevOps","Argo CD","Circle CI","TDD"],
   },
   {
     title: "Architecture & Design",
-    technologies: [
-      "System Architecture",
-      "Technical Leadership",
-      "Stakeholder Management",
-      "Enterprise Modernization",
-      "Solution Architecture",
-    ],
+    technologies: ["System Architecture","API-Design","Domain Driven Design","Landing Zones","Well-Architected Framework","IoT","Automation","Product Thinking","PaaP"],
   },
   {
     title: "Security & Compliance",
-    technologies: ["Security", "Compliance", "FinOps", "GreenOps", "IT Security", "Best Practices"],
+    technologies: ["Zero-Trust","Least Privilege","Multi-Account","Threat Modelling","OAuth","Kyverno","OWASP","OPA","EntraAD","FinOps","GreenOps"],
   },
   {
-    title: "Artificial Intelligence",
-    technologies: [
-      "Software Development",
-      "Deep Learning",
-      "AI Agents",
-      "IoT",
-      "Microservices",
-      "Event-Driven Architecture",
-    ],
-  },
+    title: "Data & Artificial Intelligence",
+    technologies: ["Deep Reinforcment Learning","MLOps","GenAI","Agentic Development","Multi-Agents","Fine-tuning","Data Mesh","Data Lake","SQL","Predictive Analytics"],
+  }
 ] as const
 
 // Leadership & Expertise Skills
-export const LEADERSHIP_SKILLS = [
-  "Platform Engineering",
-  "Technical Leadership",
-  "System Architecture",
-  "Team Mentoring",
-  "Cross-functional Collaboration",
-  "Incident Response",
-  "Performance Optimization",
-  "Scalability Planning",
-  "Cost Optimization",
-  "Migration Strategy",
-] as const
+export const LEADERSHIP_SKILLS = ["Technical Leadership","Stakeholder Management","Digital Transformation","Enterprise Modernisation","Team Mentoring","Cross-functional Collaboration","Performance Optimization","Scalability Planning","Cost Optimization","Migration Strategy"] as const
 
 // Technical Interests Section Description
-export const TECHNICAL_INTERESTS_DESCRIPTION = "Beyond my professional work, I explore cutting-edge technologies and research areas that push the boundaries of what's possible at the intersection of Modern Software Engineering, effective Infrastruture Automation and Artificial Intelligence."
+export const TECHNICAL_INTERESTS_DESCRIPTION = "Beyond my professional work, I explore cutting-edge technologies and research areas that push the boundaries of what's possible at the intersection of Modern Software Engineering, effective Infrastruture Automation and Artificial Intelligence." as const
 
 // Technical Interests
 export const TECHNICAL_INTERESTS = [
   {
     title: "AI Agent Development",
     description: "Building intelligent autonomous systems",
-    content:
-      "Exploring the development of sophisticated AI agents using Pydantic AI and LangChain frameworks. Focused on creating autonomous systems that can reason, plan, and execute complex tasks with minimal human intervention.",
-    technologies: ["Pydantic AI", "LangChain", "LLM Integration", "Agent Workflows"],
+    content: "Exploring the development of sophisticated AI agents using Pydantic AI and LangChain frameworks. Focused on creating autonomous systems that can reason, plan, and execute complex tasks with minimal human intervention.",
+    technologies: ["Pydantic AI","LangChain","LLM Integration","Agent Workflows"],
   },
   {
     title: "FinAI & Deep Reinforcement Learning",
     description: "AI-driven financial market analysis and trading",
-    content:
-      "Implementing and fine-tuning deep reinforcement learning models for stock market prediction and algorithmic trading. Research focuses on multi-agent systems and risk-aware decision making in volatile financial environments.",
-    technologies: ["Deep RL", "PyTorch", "Financial Modeling", "Quantitative Analysis"],
+    content: "Implementing and fine-tuning deep reinforcement learning models for stock market prediction and algorithmic trading. Research focuses on multi-agent systems and risk-aware decision making in volatile financial environments.",
+    technologies: ["Deep RL","PyTorch","Financial Modeling","Quantitative Analysis"],
   },
   {
     title: "Robotics & Autonomous Systems",
     description: "Hardware-software integration and control systems",
-    content:
-      "Experimenting with robotics platforms and autonomous navigation systems. Interests include sensor fusion, real-time control algorithms, and the intersection of edge computing with robotic applications.",
-    technologies: ["ROS2", "Computer Vision", "Sensor Fusion", "Edge Computing"],
+    content: "Experimenting with robotics platforms and autonomous navigation systems. Interests include sensor fusion, real-time control algorithms, and the intersection of edge computing with robotic applications.",
+    technologies: ["ROS2","Computer Vision","Sensor Fusion","Edge Computing"],
   },
   {
     title: "Progressive Web Applications",
     description: "Next.js PWAs for commercial and community use",
-    content:
-      "Developed a range of Progressive Web Applications using Next.js for both commercial and community projects. Applications include sports tournament organization systems, domain classification tools, and event entry management with QR code integration.",
-    technologies: ["Next.js", "PWA", "QR Integration", "Community Projects"],
-  },
+    content: "Developed a range of Progressive Web Applications using Next.js for both commercial and community projects. Applications include sports tournament organization systems, domain classification tools, and event entry management with QR code integration.",
+    technologies: ["Next.js","PWA","QR Integration","Community Projects"],
+  }
 ] as const

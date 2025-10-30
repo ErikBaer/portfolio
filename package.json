@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "npm run generate-constants && concurrently \"npm run watch-constants\" \"next dev\"",
+    "dev:simple": "npm run generate-constants && next dev",
+    "build": "npm run generate-constants && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate-constants": "tsx scripts/generate-constants.ts",
+    "watch-constants": "nodemon --watch content/constants-content.md --exec \"tsx scripts/generate-constants.ts\""
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -66,8 +69,11 @@
     "@types/node": "^22",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "concurrently": "^9.2.1",
+    "nodemon": "^3.1.10",
     "postcss": "^8.5",
     "tailwindcss": "^4.1.9",
+    "tsx": "^4.20.6",
     "tw-animate-css": "1.3.3",
     "typescript": "^5"
   }
