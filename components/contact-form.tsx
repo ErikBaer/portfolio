@@ -52,14 +52,26 @@ export function ContactForm() {
       })
 
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({ error: 'Failed to send message' }))
-        throw new Error(errorData.error || 'Failed to send message')
+        // Only show API error message for client errors (4xx) - user-relevant validation errors
+        // Mask server errors (5xx) with generic message
+        if (response.status >= 400 && response.status < 500) {
+          try {
+            const errorData = await response.json()
+            throw new Error(errorData.error || 'Failed to send message')
+          } catch {
+            throw new Error('Failed to send message')
+          }
+        } else {
+          // Server errors (5xx) or other errors - mask with generic message
+          throw new Error('Failed to send message')
+        }
       }
 
       setSubmitStatus('success')
       form.reset()
     } catch (error) {
       setSubmitStatus('error')
+      // Log detailed error for debugging, but don't expose to user
       console.error('Error submitting form:', error)
     } finally {
       setIsSubmitting(false)
