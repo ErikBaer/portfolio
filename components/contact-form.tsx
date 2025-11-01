@@ -18,9 +18,9 @@ import {
 import { Send } from 'lucide-react'
 
 const contactFormSchema = z.object({
-  name: z.string().min(2, 'Name muss mindestens 2 Zeichen lang sein'),
-  email: z.string().email('Bitte geben Sie eine gültige E-Mail-Adresse ein'),
-  message: z.string().min(10, 'Nachricht muss mindestens 10 Zeichen lang sein'),
+  name: z.string().min(2, 'Name must be at least 2 characters long'),
+  email: z.string().email('Please enter a valid email address'),
+  message: z.string().min(10, 'Message must be at least 10 characters long'),
 })
 
 type ContactFormValues = z.infer<typeof contactFormSchema>
@@ -52,7 +52,8 @@ export function ContactForm() {
       })
 
       if (!response.ok) {
-        throw new Error('Fehler beim Senden der Nachricht')
+        const errorData = await response.json().catch(() => ({ error: 'Failed to send message' }))
+        throw new Error(errorData.error || 'Failed to send message')
       }
 
       setSubmitStatus('success')
@@ -75,7 +76,7 @@ export function ContactForm() {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input placeholder="Ihr Name" {...field} />
+                <Input placeholder="Your name" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -87,9 +88,9 @@ export function ContactForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>E-Mail</FormLabel>
+              <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="ihre@email.de" {...field} />
+                <Input type="email" placeholder="your@email.com" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -101,10 +102,10 @@ export function ContactForm() {
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Nachricht</FormLabel>
+              <FormLabel>Message</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Ihre Nachricht..."
+                  placeholder="Your message..."
                   className="min-h-24"
                   {...field}
                 />
@@ -131,13 +132,13 @@ export function ContactForm() {
 
         {submitStatus === 'success' && (
           <p className="text-sm text-green-600 dark:text-green-400 text-center">
-            Nachricht erfolgreich gesendet! Ich melde mich bald.
+            Message sent successfully! I'll get back to you soon.
           </p>
         )}
 
         {submitStatus === 'error' && (
           <p className="text-sm text-destructive text-center">
-            Fehler beim Senden der Nachricht. Bitte versuchen Sie es erneut.
+            Failed to send message. Please try again.
           </p>
         )}
       </form>

@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
     // Validation
     if (!name || !email || !message) {
       return NextResponse.json(
-        { error: 'Alle Felder sind erforderlich' },
+        { error: 'All fields are required' },
         { status: 400 }
       )
     }
@@ -20,15 +20,15 @@ export async function POST(request: NextRequest) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(email)) {
       return NextResponse.json(
-        { error: 'Ungültige E-Mail-Adresse' },
+        { error: 'Invalid email address' },
         { status: 400 }
       )
     }
 
     if (!process.env.RESEND_API_KEY) {
-      console.error('RESEND_API_KEY ist nicht konfiguriert')
+      console.error('RESEND_API_KEY is not configured')
       return NextResponse.json(
-        { error: 'E-Mail-Service ist nicht konfiguriert' },
+        { error: 'Email service is not configured' },
         { status: 500 }
       )
     }
@@ -38,19 +38,19 @@ export async function POST(request: NextRequest) {
       from: process.env.RESEND_FROM_EMAIL || 'Portfolio <onboarding@resend.dev>',
       to: process.env.CONTACT_EMAIL || 'your-email@example.com',
       replyTo: email,
-      subject: `Kontaktanfrage von ${name}`,
+      subject: `Contact request from ${name}`,
       html: `
-        <h2>Neue Kontaktanfrage</h2>
+        <h2>New Contact Request</h2>
         <p><strong>Name:</strong> ${name}</p>
-        <p><strong>E-Mail:</strong> ${email}</p>
-        <p><strong>Nachricht:</strong></p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Message:</strong></p>
         <p>${message.replace(/\n/g, '<br>')}</p>
       `,
       text: `
-Neue Kontaktanfrage
+New Contact Request
 Name: ${name}
-E-Mail: ${email}
-Nachricht:
+Email: ${email}
+Message:
 ${message}
       `,
     })
@@ -58,7 +58,7 @@ ${message}
     if (error) {
       console.error('Resend error:', error)
       return NextResponse.json(
-        { error: 'Fehler beim Senden der E-Mail' },
+        { error: 'Failed to send email' },
         { status: 500 }
       )
     }
@@ -70,7 +70,7 @@ ${message}
   } catch (error) {
     console.error('API error:', error)
     return NextResponse.json(
-      { error: 'Interner Serverfehler' },
+      { error: 'Internal server error' },
       { status: 500 }
     )
   }

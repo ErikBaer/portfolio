@@ -4,6 +4,7 @@ import { Navigation } from "@/components/navigation"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { getCaseStudyBySlug } from "@/lib/case-studies"
+import { PERSONAL_INFO } from "@/lib/constants"
 import { notFound } from "next/navigation"
 
 interface CaseStudyPageProps {
@@ -110,7 +111,7 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps
       <footer className="py-8 px-6 border-t border-border bg-card mt-16">
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-sm text-muted-foreground">
-            © 2024 Portfolio. Built with Next.js and deployed on Vercel.
+            © 2024 {PERSONAL_INFO.name}. Built with Next.js and deployed on Vercel.
           </p>
         </div>
       </footer>
