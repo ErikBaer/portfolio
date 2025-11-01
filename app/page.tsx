@@ -2,8 +2,9 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { TechnologyBadge } from "@/components/ui/technology-badge"
-import { ArrowRight, Github, Linkedin, ExternalLink, Code, Database, Globe } from "lucide-react"
+import { ArrowRight, Github, Linkedin, ExternalLink, Layers, CircuitBoard, Users } from "lucide-react"
 import { Navigation } from "@/components/navigation"
+import { ContactForm } from "@/components/contact-form"
 import {
   PERSONAL_INFO,
   CONTACT_INFO,
@@ -92,7 +93,7 @@ export default function Portfolio() {
             <CardContent className="p-8">
               <div className="grid md:grid-cols-3 gap-8 mb-8">
                 {EXECUTIVE_SUMMARY.expertiseAreas.map((area) => {
-                  const IconComponent = area.icon === "Code" ? Code : area.icon === "Database" ? Database : Globe
+                  const IconComponent = area.icon === "Code" ? Layers : area.icon === "Database" ? CircuitBoard : Users
                   return (
                     <div key={area.title} className="text-center">
                       <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center hover:bg-accent/20 transition-all duration-300 group">
@@ -250,10 +251,10 @@ export default function Portfolio() {
 
           <div className="text-center space-y-8">
             <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto text-pretty">
-              Open to discussing platform engineering opportunities and technical leadership roles.
+              Let's talk. Whether you're looking to collaborate, discuss platform engineering challenges, or explore new opportunities—I'm here for the conversation.
             </p>
 
-            {/* Contact Details */}
+            {/* Social Links */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-8">
               <a
                 href={CONTACT_INFO.linkedin}
@@ -272,13 +273,7 @@ export default function Portfolio() {
               </a>
             </div>
 
-            {/* Availability Status */}
-            <div className="pt-4">
-              <div className="inline-flex items-center gap-3 px-4 py-2 rounded-lg bg-accent/10 border border-accent">
-                <div className="w-2 h-2 bg-accent rounded-full animate-pulse"></div>
-                <p className="text-sm text-foreground">{PERSONAL_INFO.availability}</p>
-              </div>
-            </div>
+            <ContactForm />
           </div>
         </div>
       </section>
