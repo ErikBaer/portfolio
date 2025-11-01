@@ -1,9 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useTransition, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -16,18 +15,12 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Send } from 'lucide-react'
-
-const contactFormSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters long'),
-  email: z.string().email('Please enter a valid email address'),
-  message: z.string().min(10, 'Message must be at least 10 characters long'),
-})
-
-type ContactFormValues = z.infer<typeof contactFormSchema>
+import { sendContactMessage, type ContactFormState } from '@/app/actions/contact'
+import { contactFormSchema, type ContactFormValues } from '@/lib/schemas'
 
 export function ContactForm() {
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [isPending, startTransition] = useTransition()
+  const [state, setState] = useState<ContactFormState>({ success: false })
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
@@ -38,44 +31,32 @@ export function ContactForm() {
     },
   })
 
-  async function onSubmit(values: ContactFormValues) {
-    setIsSubmitting(true)
-    setSubmitStatus('idle')
-
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(values),
-      })
-
-      if (!response.ok) {
-        // Only show API error message for client errors (4xx) - user-relevant validation errors
-        // Mask server errors (5xx) with generic message
-        if (response.status >= 400 && response.status < 500) {
-          try {
-            const errorData = await response.json()
-            throw new Error(errorData.error || 'Failed to send message')
-          } catch {
-            throw new Error('Failed to send message')
-          }
-        } else {
-          // Server errors (5xx) or other errors - mask with generic message
-          throw new Error('Failed to send message')
-        }
-      }
-
-      setSubmitStatus('success')
+  // Reset form on success
+  useEffect(() => {
+    if (state.success) {
       form.reset()
-    } catch (error) {
-      setSubmitStatus('error')
-      // Log detailed error for debugging, but don't expose to user
-      console.error('Error submitting form:', error)
-    } finally {
-      setIsSubmitting(false)
     }
+  }, [state.success, form])
+
+  // Handle server-side field errors (from Zod validation on server)
+  useEffect(() => {
+    if (state.errors) {
+      Object.entries(state.errors).forEach(([field, messages]) => {
+        if (field !== '_form' && messages) {
+          form.setError(field as keyof ContactFormValues, {
+            type: 'server',
+            message: messages[0],
+          })
+        }
+      })
+    }
+  }, [state.errors, form])
+
+  async function onSubmit(values: ContactFormValues) {
+    startTransition(async () => {
+      const result = await sendContactMessage(null, values)
+      setState(result)
+    })
   }
 
   return (
@@ -129,10 +110,10 @@ export function ContactForm() {
 
         <Button
           type="submit"
-          disabled={isSubmitting}
+          disabled={isPending}
           className="w-full"
         >
-          {isSubmitting ? (
+          {isPending ? (
             'Sending...'
           ) : (
             <>
@@ -142,15 +123,15 @@ export function ContactForm() {
           )}
         </Button>
 
-        {submitStatus === 'success' && (
+        {state.success && (
           <p className="text-sm text-green-600 dark:text-green-400 text-center">
-            Message sent successfully! I'll get back to you soon.
+            {state.message || "Message sent successfully! I'll get back to you soon."}
           </p>
         )}
 
-        {submitStatus === 'error' && (
+        {state.errors?._form && (
           <p className="text-sm text-destructive text-center">
-            Failed to send message. Please try again.
+            {state.errors._form[0]}
           </p>
         )}
       </form>
