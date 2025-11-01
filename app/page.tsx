@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { TechnologyBadge } from "@/components/ui/technology-badge"
-import { ArrowRight, Github, Linkedin, Mail, ExternalLink, Code, Database, Globe } from "lucide-react"
+import { ArrowRight, Github, Linkedin, ExternalLink, Code, Database, Globe } from "lucide-react"
 import { Navigation } from "@/components/navigation"
 import {
   PERSONAL_INFO,
@@ -77,13 +77,6 @@ export default function Portfolio() {
             >
               <Github className="h-6 w-6" />
             </a>
-            <a
-              href={`mailto:${CONTACT_INFO.email}`}
-              className="text-muted-foreground hover:text-accent transition-colors duration-300 hover:scale-110 transform"
-              aria-label="Email Contact"
-            >
-              <Mail className="h-6 w-6" />
-            </a>
           </div>
         </div>
       </section>
@@ -92,7 +85,7 @@ export default function Portfolio() {
       <section id="about" className="py-16 px-6 bg-card">
         <div className="max-w-4xl mx-auto">
           <h2 className="font-serif text-3xl md:text-4xl font-bold text-center mb-3 text-card-foreground">
-            Executive Summary
+            A tech head with a business mind
           </h2>
           <div className="w-24 h-1 bg-accent mx-auto mb-12 rounded-full"></div>
           <Card className="border-border bg-card shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
@@ -166,30 +159,8 @@ export default function Portfolio() {
       {/* Skills Section */}
       <section id="skills" className="py-16 px-6 bg-card">
         <div className="max-w-6xl mx-auto">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold text-center mb-3 text-card-foreground">
-            Technical Skills
-          </h2>
-          <div className="w-24 h-1 bg-accent mx-auto mb-12 rounded-full"></div>
-
-          <div className="flex flex-wrap justify-center gap-3">
-            {TECHNICAL_SKILLS.map((skill) => (
-              <Card key={skill.title} className="border-border bg-background flex-1 min-w-[280px] max-w-[320px] hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <CardHeader className="pb-4">
-                  <CardTitle className="font-serif text-lg text-foreground">{skill.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-2">
-                    {skill.technologies.map((tech) => (
-                      <TechnologyBadge key={tech}>{tech}</TechnologyBadge>
-                    ))}
-                </div>
-              </CardContent>
-            </Card>
-            ))}
-          </div>
-
           {/* Leadership & Soft Skills */}
-          <div className="mt-12">
+          <div id="leadership">
             <h2 className="font-serif text-3xl md:text-4xl font-bold text-center mb-3 text-card-foreground">
               Leadership & Expertise
             </h2>
@@ -203,6 +174,31 @@ export default function Portfolio() {
               >
                   {skill}
               </Badge>
+              ))}
+            </div>
+          </div>
+
+          {/* Technical Skills */}
+          <div className="mt-12">
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-center mb-3 text-card-foreground">
+              Technical Skills
+            </h2>
+            <div className="w-24 h-1 bg-accent mx-auto mb-12 rounded-full"></div>
+
+            <div className="flex flex-wrap justify-center gap-3">
+              {TECHNICAL_SKILLS.map((skill) => (
+                <Card key={skill.title} className="border-border bg-background flex-1 min-w-[280px] max-w-[320px] hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <CardHeader className="pb-4">
+                    <CardTitle className="font-serif text-lg text-foreground">{skill.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-wrap gap-2">
+                      {skill.technologies.map((tech) => (
+                        <TechnologyBadge key={tech}>{tech}</TechnologyBadge>
+                      ))}
+                  </div>
+                </CardContent>
+              </Card>
               ))}
             </div>
           </div>
@@ -259,14 +255,6 @@ export default function Portfolio() {
 
             {/* Contact Details */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-8">
-              <a
-                href={`mailto:${CONTACT_INFO.email}`}
-                className="flex items-center gap-3 text-muted-foreground hover:text-accent transition-colors group"
-              >
-                <Mail className="h-5 w-5 group-hover:scale-110 transition-transform" />
-                <span>{CONTACT_INFO.email}</span>
-              </a>
-
               <a
                 href={CONTACT_INFO.linkedin}
                 className="flex items-center gap-3 text-muted-foreground hover:text-accent transition-colors group"

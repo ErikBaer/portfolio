@@ -3,7 +3,7 @@ import { getFeaturedProjects } from "./case-studies"
 
 // Personal Information
 export const PERSONAL_INFO = {
-  name: "Erik  Baer",
+  name: "Erik Baer",
   title: "Platform Engineer & Tech Lead",
   shortDescription: "Experienced Cloud Developer and Enterprise Solutions Architect with a background in Strategic Management, creating powerful Developer Platforms that unite excellent Developer Experience, Self-service Architectures, and a focus on Product Thinking, in order to generate lasting business impact.",
   availability: "Available for new opportunities",
@@ -30,9 +30,9 @@ export const NAVIGATION = {
 
 // Contact Information
 export const CONTACT_INFO = {
-  email: "alex.thompson@example.com",
-  linkedin: "https://linkedin.com/in/alexthompson",
-  github: "https://github.com/alexthompson",
+  email: "",
+  linkedin: "https://www.linkedin.com/in/erik-baer/",
+  github: "https://github.com/ErikBaer",
 } as const
 
 // Featured Projects - imported from case-studies.ts

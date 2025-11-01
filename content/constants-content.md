@@ -8,7 +8,7 @@ Dieses Dokument enthält alle Textinhalte aus `lib/constants.ts`. Bearbeite die 
 
 ### name
 ```
-Erik  Baer
+Erik Baer
 ```
 
 ### title
@@ -70,19 +70,14 @@ My work efficiently combines deep expertise in Software Development and Continuo
 
 ## CONTACT_INFO
 
-### email
-```
-alex.thompson@example.com
-```
-
 ### linkedin
 ```
-https://linkedin.com/in/alexthompson
+https://www.linkedin.com/in/erik-baer/
 ```
 
 ### github
 ```
-https://github.com/alexthompson
+https://github.com/ErikBaer
 ```
 
 ---
