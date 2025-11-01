@@ -21,7 +21,6 @@ export const NAVIGATION = {
   items: [
     { label: "About", href: "#about" },
     { label: "Projects", href: "#projects" },
-    { label: "Case Studies", href: "/case-studies" },
     { label: "Skills", href: "#skills" },
     { label: "Interests", href: "#interests" },
     { label: "Contact", href: "#contact" },
