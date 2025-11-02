@@ -1,17 +1,22 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 
-// Mock Resend before importing
+// Mock Resend before ANY imports
 const mockSend = vi.fn()
 vi.mock('resend', () => {
   return {
     Resend: class {
       constructor(apiKey?: string) {}
-      emails = {
-        send: mockSend,
+      get emails() {
+        return {
+          send: mockSend,
+        }
       }
     },
   }
 })
+
+// Import the module to be tested after mock
+import { sendContactMessage } from '../contact'
 
 describe('sendContactMessage', () => {
   const mockEnvVars = {
@@ -20,15 +25,10 @@ describe('sendContactMessage', () => {
     CONTACT_EMAIL: 'contact@example.com',
   }
 
-  let sendContactMessage: any
-
-  beforeEach(async () => {
+  beforeEach(() => {
+    // Clear all mocks and reset
     vi.clearAllMocks()
     mockSend.mockReset()
-    
-    // Dynamic import after mock is set up
-    const module = await import('../contact')
-    sendContactMessage = module.sendContactMessage
     
     // Reset env vars
     Object.keys(mockEnvVars).forEach((key) => {
