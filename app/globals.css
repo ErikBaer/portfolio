@@ -166,7 +166,12 @@
   
   /* Any element with Vercel-related attributes */
   [class*="speed-insights"],
-  [id*="speed-insights"] {
+  [id*="speed-insights"],
+  
+  /* Vercel/Next.js Badge Links - links unten */
+  a[href*="vercel"],
+  a[href*="vercel.com"],
+  a[href*="nextjs.org"] {
     display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
@@ -176,5 +181,13 @@
     width: 0 !important;
     height: 0 !important;
     overflow: hidden !important;
+  }
+}
+
+/* Additional: Hide any fixed position element in bottom-left with Vercel/Next.js text */
+@layer utilities {
+  a[style*="position: fixed"],
+  a[style*="position:fixed"] {
+    display: none !important;
   }
 }

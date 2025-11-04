@@ -72,25 +72,31 @@ export function RemoveVercelBadge() {
         elements.forEach((el) => el.remove())
       })
 
-      // Remove any element with "vercel" in class or id (corner badges)
+      // Remove any element with "vercel" or "next.js" text that's positioned bottom-left
       const allElements = document.querySelectorAll('*')
       allElements.forEach((el) => {
+        const text = (el.textContent || '').toLowerCase()
+        const href = el.href || ''
         const className = el.className?.toString() || ''
         const id = el.id || ''
+        
+        // Check if it contains Vercel/Next.js text or href
         if (
-          (className.includes('vercel') && 
-           (className.includes('badge') || className.includes('widget') || className.includes('analytics'))) ||
-          (id.includes('vercel') && 
-           (id.includes('badge') || id.includes('widget') || id.includes('analytics')))
+          text.includes('vercel') || 
+          text.includes('next.js') || 
+          text.includes('nextjs') ||
+          href.includes('vercel') ||
+          href.includes('nextjs.org')
         ) {
-          // Check if it's positioned in a corner (likely a badge)
           const style = window.getComputedStyle(el)
-          const position = style.position
-          if (
-            position === 'fixed' &&
-            (className.includes('bottom') || id.includes('bottom') || 
-             className.includes('corner') || id.includes('corner'))
-          ) {
+          const rect = el.getBoundingClientRect()
+          const isBottomLeft = 
+            (style.position === 'fixed' || style.position === 'absolute') &&
+            rect.bottom < window.innerHeight &&
+            rect.bottom > window.innerHeight - 100 &&
+            rect.left < 200
+          
+          if (isBottomLeft) {
             el.remove()
           }
         }
