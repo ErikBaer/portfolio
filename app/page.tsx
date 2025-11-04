@@ -81,10 +81,10 @@ export default function Portfolio() {
                   const IconComponent = area.icon === "Code" ? Layers : area.icon === "Database" ? CircuitBoard : Users
                   return (
                     <div key={area.title} className="text-center">
-                      <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center hover:bg-accent/20 transition-all duration-300 group">
-                        <IconComponent className="w-8 h-8 text-primary group-hover:text-accent transition-colors duration-300" />
+                      <div className="w-16 h-16 mx-auto mb-4 bg-card rounded-full flex items-center justify-center hover:bg-accent/20 transition-all duration-300 group">
+                        <IconComponent className="w-8 h-8 text-secondary group-hover:text-accent transition-colors duration-300" />
                       </div>
-                      <h4 className="font-semibold mb-2 text-foreground">{area.title}</h4>
+                      <h4 className="text-base font-semibold mb-2 text-foreground">{area.title}</h4>
                       <p className="text-sm text-secondary leading-relaxed">{area.description}</p>
                     </div>
                   )
