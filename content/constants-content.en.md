@@ -18,7 +18,7 @@ Platform Lead & Solution Architect
 
 ### shortDescription
 ```
-Experienced Cloud Developer and Enterprise Solutions Architect with a background in Strategic Management, creating powerful Developer Platforms that unite excellent Developer Experience, Self-service Architectures, and a focus on Product Thinking, in order to generate lasting business impact.
+Experienced Cloud Developer and Enterprise Solutions Architect with a background in Strategic Management, empowering teams and creating powerful Developer Platforms that unite excellent Developer Experience, Self-service Architectures, as well as a focus on Product Thinking, in order to generate lasting business impact.
 ```
 
 ### availability

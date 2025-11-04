@@ -96,8 +96,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  // Lang attribute will be set by next-intl middleware
   return (
-    <html lang="en">
+    <html suppressHydrationWarning>
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable} ${playfair.variable} antialiased`}>
         <RemoveVercelBadge />
         <StructuredData />

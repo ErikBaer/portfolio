@@ -8,11 +8,11 @@ import { getCaseStudyBySlug } from "@/lib/case-studies"
 import { notFound } from "next/navigation"
 
 interface CaseStudyPageProps {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string; locale: string }>
 }
 
 export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps) {
-  const { slug } = await params
+  const { slug, locale } = await params
   const caseStudy = getCaseStudyBySlug(slug)
 
   if (!caseStudy) {
@@ -28,7 +28,7 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps
       <section className="py-16 px-6">
         <div className="max-w-4xl mx-auto">
           <Link
-            href="/#projects"
+            href={`/${locale}/#projects`}
             prefetch={true}
             className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors mb-8 group"
           >
@@ -106,7 +106,7 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps
             ))}
           </div>
           <Link
-            href="/#projects"
+            href={`/${locale}/#projects`}
             prefetch={true}
             className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors group mt-8"
           >

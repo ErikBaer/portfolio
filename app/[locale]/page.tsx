@@ -42,7 +42,12 @@ import {
   EXECUTIVE_SUMMARY,
 } from "@/lib/constants"
 
-export default function Portfolio() {
+interface PortfolioPageProps {
+  params: Promise<{ locale: string }>
+}
+
+export default async function Portfolio({ params }: PortfolioPageProps) {
+  const { locale } = await params
   return (
     <div className="min-h-screen bg-background">
       <SkipLink />
@@ -159,7 +164,7 @@ export default function Portfolio() {
               <CardFooter className="mt-auto">
                 <Button variant="link" className="group/btn p-0 h-auto text-accent hover:text-accent/80 font-medium" asChild>
                   <Link 
-                    href={`/case-studies/${project.slug}`}
+                    href={`/${locale}/case-studies/${project.slug}`}
                     prefetch={true}
                   >
                     Read Case Study
