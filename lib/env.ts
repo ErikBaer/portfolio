@@ -29,6 +29,7 @@ function validateEnvVar<T>(
   // If value is not set, return default (if provided) or empty string
   if (!value || value.trim() === '') {
     if (defaultValue !== undefined) {
+      // Return default without validation (defaults are assumed to be valid)
       return defaultValue
     }
     return '' as T
@@ -48,6 +49,30 @@ function validateEnvVar<T>(
 }
 
 /**
+ * Zod schema for email addresses that accepts both:
+ * - Pure email: "user@example.com"
+ * - Display name format: "Display Name <user@example.com>"
+ */
+const emailOrDisplayNameSchema = z.string().refine(
+  (val) => {
+    // Check if it's a pure email
+    if (z.string().email().safeParse(val).success) {
+      return true
+    }
+    // Check if it's in "Display Name <email>" format
+    const displayNameMatch = val.match(/^(.+?)\s*<(.+?)>$/);
+    if (displayNameMatch) {
+      const email = displayNameMatch[2].trim()
+      return z.string().email().safeParse(email).success
+    }
+    return false
+  },
+  {
+    message: 'Must be a valid email address or in "Display Name <email@example.com>" format',
+  }
+)
+
+/**
  * Validated environment variables with defaults
  * 
  * Note: Validation only happens at runtime when values are accessed, not at module load time.
@@ -60,10 +85,11 @@ export const env = {
   },
   
   // Optional with validation and defaults
+  // Accepts both "email@example.com" and "Display Name <email@example.com>" formats
   get RESEND_FROM_EMAIL(): string {
     return validateEnvVar(
       process.env.RESEND_FROM_EMAIL,
-      z.string().email(),
+      emailOrDisplayNameSchema,
       'RESEND_FROM_EMAIL',
       'Portfolio <onboarding@resend.dev>'
     )
