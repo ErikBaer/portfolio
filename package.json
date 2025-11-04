@@ -12,7 +12,8 @@
     "watch-constants": "nodemon --watch content/constants-content.md --exec \"tsx scripts/generate-constants.ts\"",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui",
+    "prepare": "husky"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -80,6 +81,7 @@
     "@vitest/ui": "^4.0.6",
     "concurrently": "^9.2.1",
     "happy-dom": "^20.0.10",
+    "husky": "^9.1.7",
     "jsdom": "^27.1.0",
     "nodemon": "^3.1.10",
     "postcss": "^8.5",
