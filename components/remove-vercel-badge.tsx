@@ -76,7 +76,7 @@ export function RemoveVercelBadge() {
       const allElements = document.querySelectorAll('*')
       allElements.forEach((el) => {
         const text = (el.textContent || '').toLowerCase()
-        const href = el.href || ''
+        const href = (el instanceof HTMLAnchorElement ? el.href : '') || ''
         const className = el.className?.toString() || ''
         const id = el.id || ''
         
