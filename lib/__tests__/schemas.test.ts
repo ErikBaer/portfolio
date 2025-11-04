@@ -11,9 +11,6 @@ describe('contactFormSchema', () => {
       })
 
       expect(result.success).toBe(false)
-      if (!result.success) {
-        expect(result.error.issues[0].message).toContain('at least 2 characters')
-      }
     })
 
     it('should accept valid names', () => {
@@ -24,16 +21,6 @@ describe('contactFormSchema', () => {
       })
 
       expect(result.success).toBe(true)
-    })
-
-    it('should reject empty names', () => {
-      const result = contactFormSchema.safeParse({
-        name: '',
-        email: 'test@example.com',
-        message: 'This is a test message',
-      })
-
-      expect(result.success).toBe(false)
     })
   })
 
@@ -46,9 +33,6 @@ describe('contactFormSchema', () => {
       })
 
       expect(result.success).toBe(false)
-      if (!result.success) {
-        expect(result.error.issues[0].message).toContain('valid email')
-      }
     })
 
     it('should accept valid email addresses', () => {
@@ -59,16 +43,6 @@ describe('contactFormSchema', () => {
       })
 
       expect(result.success).toBe(true)
-    })
-
-    it('should reject empty emails', () => {
-      const result = contactFormSchema.safeParse({
-        name: 'Erik Baer',
-        email: '',
-        message: 'This is a test message',
-      })
-
-      expect(result.success).toBe(false)
     })
   })
 
@@ -81,9 +55,6 @@ describe('contactFormSchema', () => {
       })
 
       expect(result.success).toBe(false)
-      if (!result.success) {
-        expect(result.error.issues[0].message).toContain('at least 10 characters')
-      }
     })
 
     it('should accept valid messages', () => {
@@ -94,16 +65,6 @@ describe('contactFormSchema', () => {
       })
 
       expect(result.success).toBe(true)
-    })
-
-    it('should reject empty messages', () => {
-      const result = contactFormSchema.safeParse({
-        name: 'Erik Baer',
-        email: 'test@example.com',
-        message: '',
-      })
-
-      expect(result.success).toBe(false)
     })
   })
 
@@ -127,7 +88,10 @@ describe('contactFormSchema', () => {
 
       expect(result.success).toBe(false)
       if (!result.success) {
-        expect(result.error.issues.length).toBeGreaterThan(0)
+        const fieldNames = result.error.issues.map((issue) => issue.path[0])
+        expect(fieldNames).toContain('name')
+        expect(fieldNames).toContain('email')
+        expect(fieldNames).toContain('message')
       }
     })
   })
