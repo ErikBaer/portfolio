@@ -4,8 +4,7 @@ import { Resend } from 'resend'
 import { z } from 'zod'
 import { escape } from 'html-escaper'
 import { contactFormSchema } from '@/lib/schemas'
-
-const resend = new Resend(process.env.RESEND_API_KEY)
+import { env, validateResendApiKey } from '@/lib/env'
 
 type ContactFormInput = z.infer<typeof contactFormSchema>
 
@@ -36,9 +35,11 @@ export async function sendContactMessage(
 
   const { name, email, message } = result.data
 
-  // Check if Resend is configured
-  if (!process.env.RESEND_API_KEY) {
-    console.error('RESEND_API_KEY is not configured')
+  // Validate API key at runtime (when actually used)
+  try {
+    validateResendApiKey()
+  } catch (error) {
+    // Handle missing API key gracefully
     return {
       success: false,
       errors: {
@@ -49,9 +50,11 @@ export async function sendContactMessage(
 
   try {
     // Send email using Resend
+    // Environment variables are validated at runtime via lib/env.ts
+    const resend = new Resend(env.RESEND_API_KEY)
     const { data, error } = await resend.emails.send({
-      from: process.env.RESEND_FROM_EMAIL || 'Portfolio <onboarding@resend.dev>',
-      to: process.env.CONTACT_EMAIL || 'your-email@example.com',
+      from: env.RESEND_FROM_EMAIL,
+      to: env.CONTACT_EMAIL,
       replyTo: email,
       subject: `Contact request from ${escape(name)}`,
       html: `

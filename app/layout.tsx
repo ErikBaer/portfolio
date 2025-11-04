@@ -22,7 +22,9 @@ const playfair = Playfair_Display({
   fallback: ["Georgia", "serif"],
 })
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://erikbaer.dev'
+import { env } from '@/lib/env'
+
+const siteUrl = env.NEXT_PUBLIC_SITE_URL
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
