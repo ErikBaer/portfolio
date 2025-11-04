@@ -13,12 +13,14 @@ Erik Baer
 
 ### title
 ```
-Platform Engineer & Tech Lead
+Platform Lead & Solution Architect
 ```
 
 ### shortDescription
 ```
-Experienced Cloud Developer and Enterprise Solutions Architect with a background in Strategic Management, creating powerful Developer Platforms that unite excellent Developer Experience, Self-service Architectures, and a focus on Product Thinking, in order to generate lasting business impact.
+As an experienced Cloud Developer and Enterprise Solutions Architect with a background in Strategic Management, I drive the transformation of enterprise IT infrastructure through strategic platform engineering. I enable teams and architect powerful developer platforms that unlock productivity, reduce time-to-market, and drive measurable business value for Fortune 500 companies across Finance, Healthcare, and Automotive sectors.
+
+
 ```
 
 ### availability
@@ -32,12 +34,12 @@ Available for new opportunities
 
 ### title
 ```
-Senior Platform Engineer | Tech Lead Portfolio
+Lead Platform Engineer & Solution Architect Portfolio
 ```
 
 ### description
 ```
-Personal portfolio of a Senior Platform Engineer and Tech Lead specializing in building platforms that accelerate innovation and secure delivery.
+Personal portfolio of a Lead Platform Engineer and Solution Architect specializing in building platforms that accelerate innovation and secure delivery.
 ```
 
 ---
@@ -63,7 +65,8 @@ Personal portfolio of a Senior Platform Engineer and Tech Lead specializing in b
 
 ### mainText
 ```
-My work efficiently combines deep expertise in Software Development and Continuous Delivery, DevOps, as well as IT Infrastructure Engineering, with an considerable experience in Strategic Business Development. This mindset is complimented by my strong drive to create impactful business value across complex organisations. I consider platforms as strategic products, that purposefully abstract technical complexity and provide engineering teams with greater autonomy, enabling them to focus on high-quality software development and efficient value creation.
+My work efficiently combines deep expertise in Software Development and Continuous Delivery, DevOps, as well as IT Infrastructure Engineering, with a considerable experience in Strategic Business Development. This mindset is complemented by my strong drive to create impactful business value across complex organisations. I consider platforms as strategic products, that purposefully abstract technical complexity and provide engineering teams with greater autonomy, enabling them to focus on high-quality software development and efficient value creation.
+
 ```
 
 ---
@@ -85,7 +88,7 @@ https://github.com/ErikBaer
 ## TECHNICAL_INTERESTS_DESCRIPTION
 
 ```
-Beyond my professional work, I explore cutting-edge technologies and research areas that push the boundaries of what's possible at the intersection of Modern Software Engineering, effective Infrastruture Automation and Artificial Intelligence.
+Beyond my professional work, I explore cutting-edge technologies and research areas that push the boundaries of what's possible at the intersection of Modern Software Engineering, effective Infrastructure Automation and Artificial Intelligence.
 ```
 
 ---
@@ -162,7 +165,7 @@ Kubernetes, Service Mesh, Istio, Helm, Kustomize, Docker, Backstage, Humanitec, 
 **title:** Continuous Delivery  
 **technologies:**
 ```
-Infrastructure as Code, Terraform, Continous Integration, GitLab CI, Github Actions, Azure DevOps, Argo CD, Circle CI, TDD
+Infrastructure as Code, Terraform, Continuous Integration, GitLab CI, Github Actions, Azure DevOps, Argo CD, Circle CI, TDD
 ```
 
 ### skill_4

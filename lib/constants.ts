@@ -4,15 +4,15 @@ import { getFeaturedProjects } from "./case-studies"
 // Personal Information
 export const PERSONAL_INFO = {
   name: "Erik Baer",
-  title: "Platform Engineer & Tech Lead",
-  shortDescription: "Experienced Cloud Developer and Enterprise Solutions Architect with a background in Strategic Management, creating powerful Developer Platforms that unite excellent Developer Experience, Self-service Architectures, and a focus on Product Thinking, in order to generate lasting business impact.",
+  title: "Platform Lead & Solution Architect",
+  shortDescription: "As an experienced Cloud Developer and Enterprise Solutions Architect with a background in Strategic Management, I drive the transformation of enterprise IT infrastructure through strategic platform engineering. I enable teams and architect powerful developer platforms that unlock productivity, reduce time-to-market, and drive measurable business value for Fortune 500 companies across Finance, Healthcare, and Automotive sectors.",
   availability: "Available for new opportunities",
 } as const
 
 // Metadata
 export const METADATA = {
-  title: "Senior Platform Engineer | Tech Lead Portfolio",
-  description: "Personal portfolio of a Senior Platform Engineer and Tech Lead specializing in building platforms that accelerate innovation and secure delivery.",
+  title: "Lead Platform Engineer & Solution Architect Portfolio",
+  description: "Personal portfolio of a Lead Platform Engineer and Solution Architect specializing in building platforms that accelerate innovation and secure delivery.",
   generator: "v0.app",
 } as const
 
@@ -56,7 +56,7 @@ export const EXECUTIVE_SUMMARY = {
       icon: "Globe",
     }
   ],
-  mainText: "My work efficiently combines deep expertise in Software Development and Continuous Delivery, DevOps, as well as IT Infrastructure Engineering, with an considerable experience in Strategic Business Development. This mindset is complimented by my strong drive to create impactful business value across complex organisations. I consider platforms as strategic products, that purposefully abstract technical complexity and provide engineering teams with greater autonomy, enabling them to focus on high-quality software development and efficient value creation.",
+  mainText: "My work efficiently combines deep expertise in Software Development and Continuous Delivery, DevOps, as well as IT Infrastructure Engineering, with a considerable experience in Strategic Business Development. This mindset is complemented by my strong drive to create impactful business value across complex organisations. I consider platforms as strategic products, that purposefully abstract technical complexity and provide engineering teams with greater autonomy, enabling them to focus on high-quality software development and efficient value creation.",
 } as const
 
 // Technical Skills Categories
@@ -71,7 +71,7 @@ export const TECHNICAL_SKILLS = [
   },
   {
     title: "Continuous Delivery",
-    technologies: ["Infrastructure as Code","Terraform","Continous Integration","GitLab CI","Github Actions","Azure DevOps","Argo CD","Circle CI","TDD"],
+    technologies: ["Infrastructure as Code","Terraform","Continuous Integration","GitLab CI","Github Actions","Azure DevOps","Argo CD","Circle CI","TDD"],
   },
   {
     title: "Architecture & Design",
@@ -91,7 +91,7 @@ export const TECHNICAL_SKILLS = [
 export const LEADERSHIP_SKILLS = ["Technical Leadership","Stakeholder Management","Digital Transformation","Enterprise Modernisation","Team Mentoring","Cross-functional Collaboration","Performance Optimization","Scalability Planning","Cost Optimization","Migration Strategy"] as const
 
 // Technical Interests Section Description
-export const TECHNICAL_INTERESTS_DESCRIPTION = "Beyond my professional work, I explore cutting-edge technologies and research areas that push the boundaries of what's possible at the intersection of Modern Software Engineering, effective Infrastruture Automation and Artificial Intelligence." as const
+export const TECHNICAL_INTERESTS_DESCRIPTION = "Beyond my professional work, I explore cutting-edge technologies and research areas that push the boundaries of what's possible at the intersection of Modern Software Engineering, effective Infrastructure Automation and Artificial Intelligence." as const
 
 // Technical Interests
 export const TECHNICAL_INTERESTS = [

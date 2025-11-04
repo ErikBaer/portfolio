@@ -1,12 +1,13 @@
-* Skill-Tags ueberarbeiten
 * Leadership & expertise ueberarbeiten
 * "financial" subheading anpassen und card text ne zeile laenger machen
-pushen
+* Skill-Tags ueberarbeiten
+---
 * improve on content
+* maybe smothen transition between sites
+    * nothing fancy, just smoothness
 ---
 * I18N deutsche version erstellen
 * sort and assess chatgpt enhancements
 * update footer
-* pre-commit hook to run tests (what else ?)
 
 
