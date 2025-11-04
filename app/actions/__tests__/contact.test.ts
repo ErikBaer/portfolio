@@ -17,6 +17,7 @@ vi.mock('resend', () => {
 
 // Import the module to be tested after mock
 import { sendContactMessage } from '../contact'
+import { resetRateLimitStore } from '@/lib/rate-limit'
 
 describe('sendContactMessage', () => {
   const mockEnvVars = {
@@ -28,6 +29,9 @@ describe('sendContactMessage', () => {
   beforeEach(() => {
     vi.clearAllMocks()
     mockSend.mockReset()
+    
+    // Reset rate limit store before each test to avoid rate limiting issues
+    resetRateLimitStore()
     
     Object.keys(mockEnvVars).forEach((key) => {
       delete process.env[key]
@@ -152,6 +156,64 @@ describe('sendContactMessage', () => {
 
       expect(result.success).toBe(false)
       expect(result.errors?._form).toBeDefined()
+    })
+  })
+
+  describe('rate limiting', () => {
+    beforeEach(() => {
+      process.env.RESEND_API_KEY = mockEnvVars.RESEND_API_KEY
+      process.env.RESEND_FROM_EMAIL = mockEnvVars.RESEND_FROM_EMAIL
+      process.env.CONTACT_EMAIL = mockEnvVars.CONTACT_EMAIL
+      mockSend.mockResolvedValue({ data: { id: '123' }, error: null })
+    })
+
+    it('should allow multiple requests up to limit', async () => {
+      const formData = {
+        name: 'Erik Baer',
+        email: 'erik@example.com',
+        message: 'This is a test message',
+      }
+
+      // First request should succeed
+      const result1 = await sendContactMessage(null, formData)
+      expect(result1.success).toBe(true)
+
+      // Second request should succeed
+      const result2 = await sendContactMessage(null, formData)
+      expect(result2.success).toBe(true)
+
+      // Third request should succeed
+      const result3 = await sendContactMessage(null, formData)
+      expect(result3.success).toBe(true)
+    })
+
+    it('should block requests exceeding rate limit', async () => {
+      // Reset rate limit store at the start of this specific test
+      resetRateLimitStore()
+      
+      const formData = {
+        name: 'Erik Baer',
+        email: 'ratelimited@example.com',
+        message: 'This is a test message',
+      }
+
+      // Make 3 requests (limit) - these should succeed
+      const result1 = await sendContactMessage(null, formData)
+      expect(result1.success).toBe(true)
+      const result2 = await sendContactMessage(null, formData)
+      expect(result2.success).toBe(true)
+      const result3 = await sendContactMessage(null, formData)
+      expect(result3.success).toBe(true)
+
+      // Fourth request should be blocked
+      const result4 = await sendContactMessage(null, formData)
+      expect(result4.success).toBe(false)
+      expect(result4.errors?._form).toBeDefined()
+      expect(result4.errors?._form?.[0]).toContain('Too many requests')
+      
+      // mockSend should have been called 3 times (for the first 3 successful requests)
+      // but the 4th request should be blocked before reaching the email sending code
+      expect(mockSend).toHaveBeenCalledTimes(3)
     })
   })
 })

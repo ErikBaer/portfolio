@@ -5,6 +5,7 @@ import { z } from 'zod'
 import { escape } from 'html-escaper'
 import { contactFormSchema } from '@/lib/schemas'
 import { env, validateResendApiKey } from '@/lib/env'
+import { checkRateLimit, getIdentifier } from '@/lib/rate-limit'
 
 type ContactFormInput = z.infer<typeof contactFormSchema>
 
@@ -34,6 +35,19 @@ export async function sendContactMessage(
   }
 
   const { name, email, message } = result.data
+
+  // Rate limiting: Check if user has exceeded rate limit
+  const identifier = getIdentifier(email)
+  const rateLimitResult = checkRateLimit(identifier)
+
+  if (!rateLimitResult.success) {
+    return {
+      success: false,
+      errors: {
+        _form: [rateLimitResult.message || 'Too many requests. Please try again later.'],
+      },
+    }
+  }
 
   // Validate API key at runtime (when actually used)
   try {
