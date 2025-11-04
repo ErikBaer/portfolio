@@ -285,21 +285,72 @@ ${parsed.technicalInterests
 `
 }
 
-function main() {
-  const contentPath = join(process.cwd(), "content", "constants-content.md")
-  const outputPath = join(process.cwd(), "lib", "constants.ts")
-
-  console.log("📖 Reading content from:", contentPath)
-  const parsed = parseMarkdownFile(contentPath)
-  
-  console.log("✍️  Generating constants.ts...")
-  const generated = generateConstantsFile(parsed)
-  
-  console.log("💾 Writing to:", outputPath)
-  writeFileSync(outputPath, generated, "utf-8")
-  
-  console.log("✅ Successfully generated constants.ts from constants-content.md!")
+// Generate next-intl JSON format from parsed content
+function generateNextIntlJson(parsed: ParsedContent): Record<string, any> {
+  return {
+    personalInfo: parsed.personalInfo,
+    metadata: parsed.metadata,
+    executiveSummary: parsed.executiveSummary,
+    technicalSkills: parsed.technicalSkills,
+    technicalInterests: parsed.technicalInterests,
+    technicalInterestsDescription: parsed.technicalInterestsDescription,
+    leadershipSkills: parsed.leadershipSkills,
+    contactInfo: parsed.contactInfo,
+    // UI strings will be added in step 4
+    navigation: {},
+    buttons: {},
+    sections: {},
+    form: {},
+    caseStudies: {},
+  }
 }
 
+function main() {
+  const locales = ['en', 'de'] as const
+  
+  // Generate constants.ts from the default (fallback) content file for backwards compatibility
+  const defaultContentPath = join(process.cwd(), "content", "constants-content.md")
+  const defaultOutputPath = join(process.cwd(), "lib", "constants.ts")
+  
+  if (existsSync(defaultContentPath)) {
+    console.log("📖 Reading default content from:", defaultContentPath)
+    const parsed = parseMarkdownFile(defaultContentPath)
+    
+    console.log("✍️  Generating constants.ts...")
+    const generated = generateConstantsFile(parsed)
+    
+    console.log("💾 Writing to:", defaultOutputPath)
+    writeFileSync(defaultOutputPath, generated, "utf-8")
+    
+    console.log("✅ Successfully generated constants.ts!")
+  }
+
+  // Generate JSON files for next-intl (one per locale)
+  for (const locale of locales) {
+    const contentPath = join(process.cwd(), "content", `constants-content.${locale}.md`)
+    const jsonOutputPath = join(process.cwd(), "messages", `${locale}.json`)
+    
+    if (!existsSync(contentPath)) {
+      console.warn(`⚠️  Content file not found: ${contentPath}`)
+      console.warn(`   Skipping JSON generation for locale: ${locale}`)
+      continue
+    }
+
+    console.log(`\n📖 Reading ${locale} content from:`, contentPath)
+    const parsed = parseMarkdownFile(contentPath)
+    
+    console.log(`✍️  Generating ${locale}.json...`)
+    const jsonContent = generateNextIntlJson(parsed)
+    
+    console.log(`💾 Writing to:`, jsonOutputPath)
+    writeFileSync(jsonOutputPath, JSON.stringify(jsonContent, null, 2) + "\n", "utf-8")
+    
+    console.log(`✅ Successfully generated ${locale}.json!`)
+  }
+
+  console.log("\n🎉 All files generated successfully!")
+}
+
+import { existsSync } from "fs"
 main()
 

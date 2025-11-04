@@ -6,10 +6,8 @@ const nextConfig = {
   images: {
     unoptimized: false, // Next.js Image Optimization aktiviert
   },
-  experimental: {
-    // mcpServer is not a valid experimental option in Next.js 15.1.6
-    // MCP support is available via __NEXT_EXPERIMENTAL_MCP_SERVER env var
-  },
+  // Next.js 16: MCP Server ist standardmäßig aktiviert (keine Konfiguration nötig)
+  // Der MCP Server läuft automatisch auf /_next/mcp wenn der Dev Server läuft
   // Disable Vercel Analytics and Speed Insights automatically injected badges
   // The package is still installed but not used to avoid any automatic injection
 }

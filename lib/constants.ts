@@ -5,7 +5,7 @@ import { getFeaturedProjects } from "./case-studies"
 export const PERSONAL_INFO = {
   name: "Erik Baer",
   title: "Platform Lead & Solution Architect",
-  shortDescription: "As an experienced Cloud Developer and Enterprise Solutions Architect with a background in Strategic Management, I drive the transformation of enterprise IT infrastructure through strategic platform engineering. I enable teams and architect powerful developer platforms that unlock productivity, reduce time-to-market, and drive measurable business value for Fortune 500 companies across Finance, Healthcare, and Automotive sectors.",
+  shortDescription: "Experienced Cloud Developer and Enterprise Solutions Architect with a background in Strategic Management, creating powerful Developer Platforms that unite excellent Developer Experience, Self-service Architectures, and a focus on Product Thinking, in order to generate lasting business impact.",
   availability: "Available for new opportunities",
 } as const
 
