@@ -2,9 +2,13 @@
 * Leadership & expertise ueberarbeiten
 * "financial" subheading anpassen und card text ne zeile laenger machen
 pushen
-* auf erikbaer.de verlinken
-    - portfolio.erikbaer.de
 * I18N deutsche version erstellen
 * executive kachel hinetergrund anpassen
 * get in touch section farblich abtrennen
-* sort and assess chatgpt advnacements
+* pre-commit hook to run tests (what else ?)
+* improve on content
+
+---
+
+* sort and assess chatgpt enhancements
+

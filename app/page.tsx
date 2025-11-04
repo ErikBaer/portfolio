@@ -2,12 +2,12 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { TechnologyBadge } from "@/components/ui/technology-badge"
-import { ArrowRight, Github, Linkedin, ExternalLink, Layers, CircuitBoard, Users } from "lucide-react"
+import { ArrowRight, ExternalLink, Layers, CircuitBoard, Users } from "lucide-react"
 import { Navigation } from "@/components/navigation"
 import { ContactForm } from "@/components/contact-form"
+import { SocialLinks } from "@/components/social-links"
 import {
   PERSONAL_INFO,
-  CONTACT_INFO,
   FEATURED_PROJECTS,
   TECHNICAL_SKILLS,
   LEADERSHIP_SKILLS,
@@ -40,45 +40,30 @@ export default function Portfolio() {
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
             <Button
               size="lg"
-              className="group bg-primary hover:bg-secondary text-primary-foreground hover:text-secondary-foreground px-4 py-3 transition-all duration-300 hover:shadow-lg"
+              className="group bg-primary hover:bg-secondary text-primary-foreground hover:text-secondary-foreground px-6 py-3 transition-all duration-300 hover:shadow-lg min-w-[140px]"
               asChild
             >
-              <a href="#projects">
+              <a href="#projects" className="flex items-center justify-center gap-2">
                 View Work
-                <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </a>
             </Button>
             <Button
               variant="outline"
               size="lg"
-              className="px-4 py-3 border-accent hover:bg-accent hover:text-accent-foreground transition-all duration-300 bg-transparent"
+              className="px-6 py-3 border-accent hover:bg-accent hover:text-accent-foreground transition-all duration-300 bg-transparent min-w-[140px]"
               asChild
             >
-              <a href="#skills">
+              <a href="#skills" className="flex items-center justify-center">
                 Learn More
               </a>
             </Button>
           </div>
 
-          <div className="flex justify-center gap-6 mt-12">
-            <a
-              href={CONTACT_INFO.linkedin}
-              className="text-muted-foreground hover:text-accent transition-colors duration-300 hover:scale-110 transform"
-              aria-label="LinkedIn Profile"
-            >
-              <Linkedin className="h-6 w-6" />
-            </a>
-            <a
-              href={CONTACT_INFO.github}
-              className="text-muted-foreground hover:text-accent transition-colors duration-300 hover:scale-110 transform"
-              aria-label="GitHub Profile"
-            >
-              <Github className="h-6 w-6" />
-            </a>
-          </div>
+          <SocialLinks />
         </div>
       </section>
 
@@ -89,7 +74,7 @@ export default function Portfolio() {
             A tech head with a business mind
           </h2>
           <div className="w-24 h-1 bg-accent mx-auto mb-12 rounded-full"></div>
-          <Card className="border-border bg-card shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <Card className="border-border bg-background shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
             <CardContent className="p-8">
               <div className="grid md:grid-cols-3 gap-8 mb-8">
                 {EXECUTIVE_SUMMARY.expertiseAreas.map((area) => {
@@ -99,14 +84,14 @@ export default function Portfolio() {
                       <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center hover:bg-accent/20 transition-all duration-300 group">
                         <IconComponent className="w-8 h-8 text-primary group-hover:text-accent transition-colors duration-300" />
                       </div>
-                      <h4 className="font-semibold mb-2 text-card-foreground">{area.title}</h4>
+                      <h4 className="font-semibold mb-2 text-foreground">{area.title}</h4>
                       <p className="text-sm text-secondary leading-relaxed">{area.description}</p>
                     </div>
                   )
                 })}
               </div>
               <div className="text-center">
-                <p className="text-card-foreground leading-relaxed max-w-3xl mx-auto whitespace-pre-line">
+                <p className="text-foreground leading-relaxed max-w-3xl mx-auto whitespace-pre-line">
                   {EXECUTIVE_SUMMARY.mainText}
                 </p>
               </div>
@@ -244,37 +229,24 @@ export default function Portfolio() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-16 px-6">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold text-center mb-3 text-foreground">Get In Touch</h2>
+      <section id="contact" className="py-16 px-6 bg-card">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="font-serif text-3xl md:text-4xl font-bold text-center mb-3 text-card-foreground">Get In Touch</h2>
           <div className="w-24 h-1 bg-accent mx-auto mb-12 rounded-full"></div>
+          <Card className="border-border bg-background shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+            <CardContent className="p-8">
+              <div className="text-center space-y-8">
+                <p className="text-lg text-muted-foreground leading-relaxed text-pretty">
+                  Let's talk. Whether you're looking to collaborate, discuss platform engineering challenges, or explore new opportunities—I'm here for the conversation.
+                </p>
 
-          <div className="text-center space-y-8">
-            <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto text-pretty">
-              Let's talk. Whether you're looking to collaborate, discuss platform engineering challenges, or explore new opportunities—I'm here for the conversation.
-            </p>
+                {/* Social Links */}
+                <SocialLinks />
 
-            {/* Social Links */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-8">
-              <a
-                href={CONTACT_INFO.linkedin}
-                className="flex items-center gap-3 text-muted-foreground hover:text-accent transition-colors group"
-              >
-                <Linkedin className="h-5 w-5 group-hover:scale-110 transition-transform" />
-                <span>LinkedIn</span>
-              </a>
-
-              <a
-                href={CONTACT_INFO.github}
-                className="flex items-center gap-3 text-muted-foreground hover:text-accent transition-colors group"
-              >
-                <Github className="h-5 w-5 group-hover:scale-110 transition-transform" />
-                <span>GitHub</span>
-              </a>
-            </div>
-
-            <ContactForm />
-          </div>
+                <ContactForm />
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </section>
 
@@ -282,7 +254,7 @@ export default function Portfolio() {
       <footer className="py-8 px-6 border-t border-border bg-card">
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-sm text-muted-foreground">
-            © 2024 {PERSONAL_INFO.name}. Built with Next.js and deployed on Vercel.
+            © 2025 {PERSONAL_INFO.name}
           </p>
         </div>
       </footer>
