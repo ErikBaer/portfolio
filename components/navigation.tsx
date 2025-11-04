@@ -11,7 +11,7 @@ export function Navigation() {
   const isHomePage = pathname === '/'
 
   return (
-    <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
+    <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border" aria-label="Main navigation">
       <div className="max-w-6xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <a 
@@ -22,18 +22,20 @@ export function Navigation() {
                 window.scrollTo({ top: 0, behavior: 'smooth' })
               }
             }}
-            className="font-serif text-xl font-semibold text-accent hover:text-accent/80 transition-colors"
+            className="font-serif text-xl font-semibold text-accent hover:text-accent/80 transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 rounded-sm"
+            aria-label={`${PERSONAL_INFO.name} - Home`}
           >
             {PERSONAL_INFO.name}
           </a>
           
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-8" role="list">
             {NAVIGATION.items.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="text-muted-foreground hover:text-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 rounded-sm"
+                role="listitem"
               >
                 {item.label}
               </a>
@@ -43,26 +45,26 @@ export function Navigation() {
           {/* Mobile Navigation */}
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden">
-                <Menu className="h-6 w-6" />
+              <Button variant="ghost" size="icon" className="md:hidden" aria-label="Open navigation menu">
+                <Menu className="h-6 w-6" aria-hidden="true" />
                 <span className="sr-only">Open menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right">
+            <SheetContent side="right" aria-label="Mobile navigation menu">
               <SheetHeader>
                 <SheetTitle>Navigation</SheetTitle>
               </SheetHeader>
-              <div className="flex flex-col items-center gap-6 mt-12">
+              <nav className="flex flex-col items-center gap-6 mt-12" aria-label="Mobile navigation links">
                 {NAVIGATION.items.map((item) => (
                   <a
                     key={item.href}
                     href={item.href}
-                    className="text-center text-lg font-medium text-muted-foreground hover:text-foreground transition-colors w-full py-3 px-6 rounded-lg hover:bg-accent/10"
+                    className="text-center text-lg font-medium text-muted-foreground hover:text-foreground transition-colors w-full py-3 px-6 rounded-lg hover:bg-accent/10 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
                   >
                     {item.label}
                   </a>
                 ))}
-              </div>
+              </nav>
             </SheetContent>
           </Sheet>
         </div>

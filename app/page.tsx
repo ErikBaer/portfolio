@@ -7,6 +7,7 @@ import { Navigation } from "@/components/navigation"
 import { ContactForm } from "@/components/contact-form"
 import { SocialLinks } from "@/components/social-links"
 import { Footer } from "@/components/footer"
+import { SkipLink } from "@/components/skip-link"
 import {
   PERSONAL_INFO,
   FEATURED_PROJECTS,
@@ -20,14 +21,16 @@ import {
 export default function Portfolio() {
   return (
     <div className="min-h-screen bg-background">
+      <SkipLink />
       {/* Navigation */}
       <Navigation />
 
       {/* Hero Section */}
-      <section className="py-20 px-6">
+      <main id="main-content" className="scroll-mt-20">
+      <section className="py-20 px-6" aria-labelledby="hero-heading">
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-6">
-            <h1 className="font-serif text-5xl md:text-6xl font-bold text-foreground mb-4 text-balance">
+            <h1 id="hero-heading" className="font-serif text-5xl md:text-6xl font-bold text-foreground mb-4 text-balance">
               {PERSONAL_INFO.name}
             </h1>
             <p className="text-xl md:text-2xl text-accent mb-6 text-balance font-medium">
@@ -49,7 +52,7 @@ export default function Portfolio() {
             >
               <a href="#projects" className="flex items-center justify-center gap-2">
                 View Work
-                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
               </a>
             </Button>
             <Button
@@ -69,9 +72,9 @@ export default function Portfolio() {
       </section>
 
       {/* Executive Summary Section */}
-      <section id="about" className="py-16 px-6 bg-card">
+      <section id="about" className="py-16 px-6 bg-card" aria-labelledby="about-heading">
         <div className="max-w-4xl mx-auto">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold text-center mb-3 text-card-foreground">
+          <h2 id="about-heading" className="font-serif text-3xl md:text-4xl font-bold text-center mb-3 text-card-foreground">
             A tech head with a business mind
           </h2>
           <div className="w-24 h-1 bg-accent mx-auto mb-12 rounded-full"></div>
@@ -102,9 +105,9 @@ export default function Portfolio() {
       </section>
 
       {/* Featured Projects Section */}
-      <section id="projects" className="py-16 px-6">
+      <section id="projects" className="py-16 px-6" aria-labelledby="projects-heading">
         <div className="max-w-6xl mx-auto">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold text-center mb-3 text-foreground">
+          <h2 id="projects-heading" className="font-serif text-3xl md:text-4xl font-bold text-center mb-3 text-foreground">
             Featured Projects
           </h2>
           <div className="w-24 h-1 bg-accent mx-auto mb-12 rounded-full"></div>
@@ -133,7 +136,7 @@ export default function Portfolio() {
                 <Button variant="link" className="group/btn p-0 h-auto text-accent hover:text-accent/80 font-medium" asChild>
                   <a href={`/case-studies/${project.slug}`}>
                     Read Case Study
-                    <ExternalLink className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                    <ExternalLink className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" aria-hidden="true" />
                   </a>
                 </Button>
               </CardFooter>
@@ -144,11 +147,11 @@ export default function Portfolio() {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="py-16 px-6 bg-card">
+      <section id="skills" className="py-16 px-6 bg-card" aria-labelledby="skills-heading">
         <div className="max-w-6xl mx-auto">
           {/* Leadership & Soft Skills */}
-          <div id="leadership">
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-center mb-3 text-card-foreground">
+          <div id="leadership" aria-labelledby="leadership-heading">
+            <h2 id="leadership-heading" className="font-serif text-3xl md:text-4xl font-bold text-center mb-3 text-card-foreground">
               Leadership & Expertise
             </h2>
             <div className="w-24 h-1 bg-accent mx-auto mb-8 rounded-full"></div>
@@ -166,8 +169,8 @@ export default function Portfolio() {
           </div>
 
           {/* Technical Skills */}
-          <div className="mt-12">
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-center mb-3 text-card-foreground">
+          <div className="mt-12" aria-labelledby="technical-skills-heading">
+            <h2 id="technical-skills-heading" className="font-serif text-3xl md:text-4xl font-bold text-center mb-3 text-card-foreground">
               Technical Skills
             </h2>
             <div className="w-24 h-1 bg-accent mx-auto mb-12 rounded-full"></div>
@@ -193,9 +196,9 @@ export default function Portfolio() {
       </section>
 
       {/* Technical Interests Section */}
-      <section id="interests" className="py-16 px-6">
+      <section id="interests" className="py-16 px-6" aria-labelledby="interests-heading">
         <div className="max-w-6xl mx-auto">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold text-center mb-3 text-foreground">
+          <h2 id="interests-heading" className="font-serif text-3xl md:text-4xl font-bold text-center mb-3 text-foreground">
             Technical Interests
           </h2>
           <div className="w-24 h-1 bg-accent mx-auto mb-4 rounded-full"></div>
@@ -230,9 +233,9 @@ export default function Portfolio() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-16 px-6 bg-card">
+      <section id="contact" className="py-16 px-6 bg-card" aria-labelledby="contact-heading">
         <div className="max-w-2xl mx-auto">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold text-center mb-3 text-card-foreground">Get In Touch</h2>
+          <h2 id="contact-heading" className="font-serif text-3xl md:text-4xl font-bold text-center mb-3 text-card-foreground">Get In Touch</h2>
           <div className="w-24 h-1 bg-accent mx-auto mb-12 rounded-full"></div>
           <Card className="border-border bg-background shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
             <CardContent className="p-8">
@@ -250,6 +253,7 @@ export default function Portfolio() {
           </Card>
         </div>
       </section>
+      </main>
 
       <Footer />
     </div>
