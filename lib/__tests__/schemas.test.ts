@@ -13,6 +13,46 @@ describe('contactFormSchema', () => {
       expect(result.success).toBe(false)
     })
 
+    it('should reject names longer than 100 characters', () => {
+      const result = contactFormSchema.safeParse({
+        name: 'A'.repeat(101),
+        email: 'test@example.com',
+        message: 'This is a test message',
+      })
+
+      expect(result.success).toBe(false)
+    })
+
+    it('should reject names with invalid characters', () => {
+      const result = contactFormSchema.safeParse({
+        name: 'Erik123 Baer',
+        email: 'test@example.com',
+        message: 'This is a test message',
+      })
+
+      expect(result.success).toBe(false)
+    })
+
+    it('should reject names that are only whitespace', () => {
+      const result = contactFormSchema.safeParse({
+        name: '   ',
+        email: 'test@example.com',
+        message: 'This is a test message',
+      })
+
+      expect(result.success).toBe(false)
+    })
+
+    it('should accept valid names with accents and hyphens', () => {
+      const result = contactFormSchema.safeParse({
+        name: "Jean-Pierre O'Connor",
+        email: 'test@example.com',
+        message: 'This is a test message',
+      })
+
+      expect(result.success).toBe(true)
+    })
+
     it('should accept valid names', () => {
       const result = contactFormSchema.safeParse({
         name: 'Erik Baer',
@@ -35,6 +75,42 @@ describe('contactFormSchema', () => {
       expect(result.success).toBe(false)
     })
 
+    it('should reject emails longer than 254 characters', () => {
+      const result = contactFormSchema.safeParse({
+        name: 'Erik Baer',
+        email: 'a'.repeat(250) + '@example.com',
+        message: 'This is a test message',
+      })
+
+      expect(result.success).toBe(false)
+    })
+
+    it('should normalize email to lowercase', () => {
+      const result = contactFormSchema.safeParse({
+        name: 'Erik Baer',
+        email: 'ERIK.BAER@EXAMPLE.COM',
+        message: 'This is a test message',
+      })
+
+      expect(result.success).toBe(true)
+      if (result.success) {
+        expect(result.data.email).toBe('erik.baer@example.com')
+      }
+    })
+
+    it('should trim email whitespace', () => {
+      const result = contactFormSchema.safeParse({
+        name: 'Erik Baer',
+        email: '  erik@example.com  ',
+        message: 'This is a test message',
+      })
+
+      expect(result.success).toBe(true)
+      if (result.success) {
+        expect(result.data.email).toBe('erik@example.com')
+      }
+    })
+
     it('should accept valid email addresses', () => {
       const result = contactFormSchema.safeParse({
         name: 'Erik Baer',
@@ -52,6 +128,46 @@ describe('contactFormSchema', () => {
         name: 'Erik Baer',
         email: 'test@example.com',
         message: 'short',
+      })
+
+      expect(result.success).toBe(false)
+    })
+
+    it('should reject messages longer than 2000 characters', () => {
+      const result = contactFormSchema.safeParse({
+        name: 'Erik Baer',
+        email: 'test@example.com',
+        message: 'A'.repeat(2001),
+      })
+
+      expect(result.success).toBe(false)
+    })
+
+    it('should reject messages that are only whitespace', () => {
+      const result = contactFormSchema.safeParse({
+        name: 'Erik Baer',
+        email: 'test@example.com',
+        message: '          ',
+      })
+
+      expect(result.success).toBe(false)
+    })
+
+    it('should reject messages with spam patterns', () => {
+      const result = contactFormSchema.safeParse({
+        name: 'Erik Baer',
+        email: 'test@example.com',
+        message: 'Buy now! Click here for free money!',
+      })
+
+      expect(result.success).toBe(false)
+    })
+
+    it('should reject messages with URLs', () => {
+      const result = contactFormSchema.safeParse({
+        name: 'Erik Baer',
+        email: 'test@example.com',
+        message: 'Check out http://example.com for more info',
       })
 
       expect(result.success).toBe(false)

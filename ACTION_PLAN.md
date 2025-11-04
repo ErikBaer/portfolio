@@ -193,14 +193,21 @@ Dieser Actionplan führt Schritt für Schritt durch alle Verbesserungen aus der 
 ---
 
 ### ✅ 15. Input Sanitization
-- [ ] `lib/schemas.ts` - Zod Schema erweitern
-- [ ] Max-Length Validierung
-- [ ] Regex-Pattern für Name (nur erlaubte Zeichen)
-- [ ] Spam-Pattern Detection (optional)
-- [ ] Testen: Verschiedene Inputs testen
-- [ ] Commit: `feat: Erweiterte Input-Validierung`
+- [x] `lib/schemas.ts` - Zod Schema erweitern
+- [x] Max-Length Validierung (Name: 100, Email: 254, Message: 2000)
+- [x] Regex-Pattern für Name (nur erlaubte Zeichen: letters, spaces, hyphens, apostrophes)
+- [x] Spam-Pattern Detection (URLs, common spam keywords)
+- [x] Email Normalisierung (trim, toLowerCase)
+- [x] Testen: Verschiedene Inputs testen (19 Tests)
+- [x] Commit: `feat: Erweiterte Input-Validierung`
 
-**Status:** ⏳ Pending
+**Status:** ✅ **COMPLETE!**
+
+**Implementierung:**
+- Name: 2-100 Zeichen, nur Buchstaben, Leerzeichen, Bindestriche, Apostrophe
+- Email: Max 254 Zeichen (RFC 5321), automatisches trim und lowercase
+- Message: 10-2000 Zeichen, Spam-Erkennung (URLs, Spam-Keywords)
+- Alle bestehenden Tests bestehen weiterhin
 
 ---
 
@@ -230,8 +237,8 @@ Dieser Actionplan führt Schritt für Schritt durch alle Verbesserungen aus der 
 ## 📊 Fortschritt
 
 **Phase 1 (Kritisch):** 8/8 ✅ **COMPLETE!**
-**Phase 2 (Hoch):** 5/9 ✅
-**Gesamt:** 13/17 ✅
+**Phase 2 (Hoch):** 6/9 ✅
+**Gesamt:** 14/17 ✅
 
 ---
 
