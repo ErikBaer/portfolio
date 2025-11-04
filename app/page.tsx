@@ -3,11 +3,35 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from "@/components/ui/badge"
 import { TechnologyBadge } from "@/components/ui/technology-badge"
 import { ArrowRight, ExternalLink, Layers, CircuitBoard, Users } from "lucide-react"
+import Link from "next/link"
 import { Navigation } from "@/components/navigation"
-import { ContactForm } from "@/components/contact-form"
 import { SocialLinks } from "@/components/social-links"
 import { Footer } from "@/components/footer"
 import { SkipLink } from "@/components/skip-link"
+import dynamic from "next/dynamic"
+import { Suspense } from "react"
+
+/**
+ * Code Splitting: ContactForm is lazy-loaded since it's only needed
+ * when user scrolls to the contact section. This reduces initial bundle size.
+ * 
+ * The form includes React Hook Form and validation libraries which add
+ * ~15-20KB to the bundle. Loading it only when needed improves initial page load.
+ */
+const ContactForm = dynamic(
+  () => import("@/components/contact-form").then((mod) => ({ default: mod.ContactForm })),
+  {
+    loading: () => (
+      <div className="space-y-6 max-w-md mx-auto">
+        <div className="h-4 bg-accent/20 rounded animate-pulse" />
+        <div className="h-4 bg-accent/20 rounded animate-pulse w-3/4" />
+        <div className="h-24 bg-accent/20 rounded animate-pulse" />
+        <div className="h-10 bg-accent/20 rounded animate-pulse" />
+      </div>
+    ),
+    // ContactForm is client-only (uses React Hook Form), so it will be excluded from SSR automatically
+  }
+)
 import {
   PERSONAL_INFO,
   FEATURED_PROJECTS,
@@ -134,10 +158,13 @@ export default function Portfolio() {
               </CardContent>
               <CardFooter className="mt-auto">
                 <Button variant="link" className="group/btn p-0 h-auto text-accent hover:text-accent/80 font-medium" asChild>
-                  <a href={`/case-studies/${project.slug}`}>
+                  <Link 
+                    href={`/case-studies/${project.slug}`}
+                    prefetch={true}
+                  >
                     Read Case Study
                     <ExternalLink className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" aria-hidden="true" />
-                  </a>
+                  </Link>
                 </Button>
               </CardFooter>
             </Card>
@@ -247,7 +274,16 @@ export default function Portfolio() {
                 {/* Social Links */}
                 <SocialLinks />
 
-                <ContactForm />
+                <Suspense fallback={
+                  <div className="space-y-6 max-w-md mx-auto">
+                    <div className="h-4 bg-accent/20 rounded animate-pulse" />
+                    <div className="h-4 bg-accent/20 rounded animate-pulse w-3/4" />
+                    <div className="h-24 bg-accent/20 rounded animate-pulse" />
+                    <div className="h-10 bg-accent/20 rounded animate-pulse" />
+                  </div>
+                }>
+                  <ContactForm />
+                </Suspense>
               </div>
             </CardContent>
           </Card>

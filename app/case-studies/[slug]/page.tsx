@@ -29,9 +29,10 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps
         <div className="max-w-4xl mx-auto">
           <Link
             href="/#projects"
+            prefetch={true}
             className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors mb-8 group"
           >
-            <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform" />
+            <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform" aria-hidden="true" />
             Back to Portfolio
           </Link>
 
@@ -106,9 +107,10 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps
           </div>
           <Link
             href="/#projects"
+            prefetch={true}
             className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors group mt-8"
           >
-            <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform" />
+            <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform" aria-hidden="true" />
             Back to Portfolio
           </Link>
         </div>

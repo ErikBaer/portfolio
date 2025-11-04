@@ -9,10 +9,18 @@ import "./globals.css"
 import { METADATA as METADATA_CONFIG, PERSONAL_INFO, CONTACT_INFO } from "@/lib/constants"
 import { StructuredData } from "@/components/structured-data"
 
+/**
+ * Font configuration with performance optimizations:
+ * - preload: true - Ensures fonts load early for better perceived performance
+ * - fallback: Provides immediate text rendering while fonts load
+ * - display: "swap" - Shows fallback font immediately, swaps when custom font loads
+ */
 const playfair = Playfair_Display({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-playfair",
+  preload: true,
+  fallback: ["Georgia", "serif"],
 })
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://erikbaer.dev'
