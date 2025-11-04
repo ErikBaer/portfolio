@@ -1,10 +1,10 @@
 import { Badge } from "@/components/ui/badge"
 import { TechnologyBadge } from "@/components/ui/technology-badge"
 import { Navigation } from "@/components/navigation"
+import { Footer } from "@/components/footer"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { getCaseStudyBySlug } from "@/lib/case-studies"
-import { PERSONAL_INFO } from "@/lib/constants"
 import { notFound } from "next/navigation"
 
 interface CaseStudyPageProps {
@@ -95,26 +95,29 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps
       </section>
 
       {/* Tags Section */}
-      <section className="py-16 px-6">
+      <section className="pt-16 pb-0 px-6">
         <div className="max-w-4xl mx-auto">
           <h3 className="font-serif text-2xl md:text-3xl font-bold text-foreground mb-6">Tags</h3>
           <div className="w-24 h-1 bg-accent mb-8 rounded-full"></div>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 mb-6">
             {caseStudy.tags.map((tag) => (
               <TechnologyBadge key={tag}>{tag}</TechnologyBadge>
             ))}
           </div>
+          <Link
+            href="/"
+            className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors group mt-8"
+          >
+            <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform" />
+            Back to Portfolio
+          </Link>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-6 border-t border-border bg-card mt-16">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-sm text-muted-foreground">
-            © 2024 {PERSONAL_INFO.name}. Built with Next.js and deployed on Vercel.
-          </p>
-        </div>
-      </footer>
+      <div className="mt-16">
+        <Footer />
+      </div>
     </div>
   )
 }
