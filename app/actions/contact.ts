@@ -6,6 +6,7 @@ import { escape } from 'html-escaper'
 import { contactFormSchema } from '@/lib/schemas'
 import { env, validateResendApiKey } from '@/lib/env'
 import { checkRateLimit, getIdentifier } from '@/lib/rate-limit'
+import { logError } from '@/lib/logger'
 
 type ContactFormInput = z.infer<typeof contactFormSchema>
 
@@ -88,7 +89,11 @@ ${message}
     })
 
     if (error) {
-      console.error('Resend error:', error)
+      logError('Resend API error', error, {
+        email,
+        name,
+        resendError: error,
+      })
       return {
         success: false,
         errors: {
@@ -102,7 +107,11 @@ ${message}
       message: 'Message sent successfully!',
     }
   } catch (error) {
-    console.error('Contact form error:', error)
+    logError('Contact form unexpected error', error, {
+      email,
+      name,
+      hasMessage: !!message,
+    })
     return {
       success: false,
       errors: {

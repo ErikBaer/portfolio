@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
 import { AlertCircle } from 'lucide-react'
+import { logError } from '@/lib/logger'
 
 export default function Error({
   error,
@@ -15,7 +16,10 @@ export default function Error({
 }) {
   useEffect(() => {
     // Log error to error reporting service
-    console.error('Application error:', error)
+    logError('Application error', error, {
+      digest: error.digest,
+      component: 'error-boundary',
+    })
   }, [error])
 
   return (
