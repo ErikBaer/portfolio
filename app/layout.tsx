@@ -18,6 +18,10 @@ export const metadata: Metadata = {
   title: METADATA_CONFIG.title,
   description: METADATA_CONFIG.description,
   generator: METADATA_CONFIG.generator,
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
 }
 
 export default function RootLayout({
