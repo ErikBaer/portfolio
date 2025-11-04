@@ -251,7 +251,6 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* Footer */}
       <Footer />
     </div>
   )

@@ -95,7 +95,7 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps
       </section>
 
       {/* Tags Section */}
-      <section className="pt-16 pb-0 px-6">
+      <section className="py-16 px-6">
         <div className="max-w-4xl mx-auto">
           <h3 className="font-serif text-2xl md:text-3xl font-bold text-foreground mb-6">Tags</h3>
           <div className="w-24 h-1 bg-accent mb-8 rounded-full"></div>
@@ -114,10 +114,7 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps
         </div>
       </section>
 
-      {/* Footer */}
-      <div className="mt-16">
-        <Footer />
-      </div>
+      <Footer />
     </div>
   )
 }

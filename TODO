@@ -2,13 +2,11 @@
 * Leadership & expertise ueberarbeiten
 * "financial" subheading anpassen und card text ne zeile laenger machen
 pushen
-* I18N deutsche version erstellen
-* executive kachel hinetergrund anpassen
-* get in touch section farblich abtrennen
-* pre-commit hook to run tests (what else ?)
 * improve on content
-
 ---
-
+* I18N deutsche version erstellen
 * sort and assess chatgpt enhancements
+* update footer
+* pre-commit hook to run tests (what else ?)
+
 
