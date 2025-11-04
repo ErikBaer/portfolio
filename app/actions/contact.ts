@@ -2,6 +2,7 @@
 
 import { Resend } from 'resend'
 import { z } from 'zod'
+import { escape } from 'html-escaper'
 import { contactFormSchema } from '@/lib/schemas'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
@@ -52,13 +53,13 @@ export async function sendContactMessage(
       from: process.env.RESEND_FROM_EMAIL || 'Portfolio <onboarding@resend.dev>',
       to: process.env.CONTACT_EMAIL || 'your-email@example.com',
       replyTo: email,
-      subject: `Contact request from ${name}`,
+      subject: `Contact request from ${escape(name)}`,
       html: `
         <h2>New Contact Request</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Name:</strong> ${escape(name)}</p>
+        <p><strong>Email:</strong> ${escape(email)}</p>
         <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, '<br>')}</p>
+        <p>${escape(message).replace(/\n/g, '<br>')}</p>
       `,
       text: `
 New Contact Request
