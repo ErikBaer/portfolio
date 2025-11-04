@@ -17,8 +17,8 @@ export default async function LocaleLayout({
     notFound()
   }
 
-  // Providing all messages to the client
-  // side is the easiest way to get started
+  // Providing all messages to the client side
+  // getMessages automatically uses the locale from the request context
   const messages = await getMessages()
 
   return (
