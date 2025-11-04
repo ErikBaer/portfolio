@@ -17,7 +17,7 @@ export default function GlobalError({
   }, [error])
 
   return (
-    <html lang="de">
+    <html lang="en">
       <body>
         <div className="min-h-screen bg-background flex items-center justify-center px-6">
           <div className="text-center max-w-md">
@@ -25,22 +25,22 @@ export default function GlobalError({
               <AlertCircle className="h-16 w-16 text-destructive" />
             </div>
             <h1 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Kritischer Fehler
+              Critical Error
             </h1>
             <p className="text-muted-foreground mb-8">
-              Ein schwerwiegender Fehler ist aufgetreten. Die Anwendung konnte nicht geladen werden.
+              A critical error occurred. The application could not be loaded.
             </p>
             {error.digest && (
               <p className="text-sm text-muted-foreground mb-4">
-                Fehler-ID: {error.digest}
+                Error ID: {error.digest}
               </p>
             )}
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button onClick={reset} variant="default">
-                Erneut versuchen
+                Try again
               </Button>
               <Button onClick={() => (window.location.href = '/')} variant="outline">
-                Zur Startseite
+                Go to homepage
               </Button>
             </div>
           </div>

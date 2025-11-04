@@ -27,22 +27,22 @@ export default function Error({
             <AlertCircle className="h-16 w-16 text-destructive" />
           </div>
           <h1 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Etwas ist schiefgelaufen
+            Something went wrong
           </h1>
           <p className="text-muted-foreground mb-8">
-            Es tut uns leid, aber ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es erneut.
+            We're sorry, but an unexpected error occurred. Please try again.
           </p>
           {error.digest && (
             <p className="text-sm text-muted-foreground mb-4">
-              Fehler-ID: {error.digest}
+              Error ID: {error.digest}
             </p>
           )}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button onClick={reset} variant="default">
-              Erneut versuchen
+              Try again
             </Button>
             <Button onClick={() => (window.location.href = '/')} variant="outline">
-              Zur Startseite
+              Go to homepage
             </Button>
           </div>
         </div>
