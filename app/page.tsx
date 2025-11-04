@@ -238,7 +238,7 @@ export default function Portfolio() {
             <CardContent className="p-8">
               <div className="text-center space-y-8">
                 <p className="text-lg text-muted-foreground leading-relaxed text-pretty">
-                  Let's talk. Whether you're looking to collaborate, discuss platform engineering challenges, or explore new opportunities—I'm here for the conversation.
+                  Whether you're looking to collaborate, discuss platform engineering challenges, or explore new opportunities—I'm here for the conversation. Let's talk!
                 </p>
 
                 {/* Social Links */}
