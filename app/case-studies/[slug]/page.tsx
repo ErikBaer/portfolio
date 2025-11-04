@@ -28,7 +28,7 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps
       <section className="py-16 px-6">
         <div className="max-w-4xl mx-auto">
           <Link
-            href="/"
+            href="/#projects"
             className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors mb-8 group"
           >
             <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform" />
@@ -105,7 +105,7 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps
             ))}
           </div>
           <Link
-            href="/"
+            href="/#projects"
             className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors group mt-8"
           >
             <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform" />
