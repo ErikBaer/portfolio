@@ -1,0 +1,3 @@
+# Ignore Vercel Analytics auto-injection
+# This file prevents Vercel from automatically injecting analytics badges
+

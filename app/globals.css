@@ -131,3 +131,50 @@
     scroll-behavior: smooth;
   }
 }
+
+/* Hide Vercel Analytics/Speed Insights badge widget - COMPREHENSIVE */
+@layer utilities {
+  /* Vercel Analytics badge - all possible selectors */
+  [data-va],
+  [data-va-iframe],
+  [data-va-widget],
+  [data-vercel-analytics],
+  iframe[src*="vercel-scripts.com"],
+  iframe[src*="va.vercel"],
+  iframe[src*="vercel.com/analytics"],
+  iframe[src*="vercel.com/speed-insights"],
+  
+  /* Vercel Speed Insights badge */
+  [data-speed-insights],
+  [data-speed-insights-widget],
+  [data-vercel-speed-insights],
+  
+  /* Common Vercel widget classes and IDs */
+  .va-iframe,
+  .va-widget,
+  .speed-insights-widget,
+  .vercel-analytics,
+  .vercel-speed-insights,
+  #vercel-analytics,
+  #vercel-speed-insights,
+  
+  /* Vercel badge in corners (bottom-left, bottom-right) */
+  [class*="vercel"],
+  [id*="vercel"],
+  [class*="va-"],
+  [id*="va-"],
+  
+  /* Any element with Vercel-related attributes */
+  [class*="speed-insights"],
+  [id*="speed-insights"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    position: absolute !important;
+    left: -9999px !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+}
