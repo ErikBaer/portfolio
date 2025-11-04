@@ -4,7 +4,7 @@ const nextConfig = {
     ignoreBuildErrors: false,
   },
   images: {
-    unoptimized: true,
+    unoptimized: false, // Next.js Image Optimization aktiviert
   },
   experimental: {
     // mcpServer is not a valid experimental option in Next.js 15.1.6
