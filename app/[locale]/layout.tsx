@@ -1,7 +1,56 @@
 import { NextIntlClientProvider } from 'next-intl'
-import { getMessages } from 'next-intl/server'
+import { getMessages, getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
-import { locales } from '@/i18n'
+import { locales, defaultLocale } from '@/i18n'
+import type { Metadata } from 'next'
+import { env } from '@/lib/env'
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  const t = await getTranslations({ locale })
+  const siteUrl = env.NEXT_PUBLIC_SITE_URL
+
+  return {
+    title: {
+      default: t('metadata.title'),
+      template: '%s | Erik Baer',
+    },
+    description: t('metadata.description'),
+    openGraph: {
+      type: 'website',
+      locale: locale === 'de' ? 'de_DE' : 'en_US',
+      url: `${siteUrl}/${locale}`,
+      siteName: `${t('personalInfo.name')} - Portfolio`,
+      title: t('metadata.title'),
+      description: t('metadata.description'),
+      images: [
+        {
+          url: '/og-image.jpg',
+          width: 1200,
+          height: 630,
+          alt: `${t('personalInfo.name')} - ${t('personalInfo.title')}`,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('metadata.title'),
+      description: t('metadata.description'),
+      images: ['/og-image.jpg'],
+    },
+    alternates: {
+      canonical: `${siteUrl}/${locale}`,
+      languages: {
+        'en': `${siteUrl}/en`,
+        'de': `${siteUrl}/de`,
+      },
+    },
+  }
+}
 
 export default async function LocaleLayout({
   children,
@@ -18,7 +67,7 @@ export default async function LocaleLayout({
   }
 
   // Providing all messages to the client side
-  // getMessages automatically uses the locale from the request context
+  // Use getMessages() which automatically uses the locale from request context
   const messages = await getMessages()
 
   return (

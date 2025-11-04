@@ -10,6 +10,8 @@ import { Footer } from "@/components/footer"
 import { SkipLink } from "@/components/skip-link"
 import dynamic from "next/dynamic"
 import { Suspense } from "react"
+import { useTranslations } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
 
 /**
  * Code Splitting: ContactForm is lazy-loaded since it's only needed
@@ -32,15 +34,7 @@ const ContactForm = dynamic(
     // ContactForm is client-only (uses React Hook Form), so it will be excluded from SSR automatically
   }
 )
-import {
-  PERSONAL_INFO,
-  FEATURED_PROJECTS,
-  TECHNICAL_SKILLS,
-  LEADERSHIP_SKILLS,
-  TECHNICAL_INTERESTS,
-  TECHNICAL_INTERESTS_DESCRIPTION,
-  EXECUTIVE_SUMMARY,
-} from "@/lib/constants"
+import { FEATURED_PROJECTS } from "@/lib/constants"
 
 interface PortfolioPageProps {
   params: Promise<{ locale: string }>
@@ -48,6 +42,7 @@ interface PortfolioPageProps {
 
 export default async function Portfolio({ params }: PortfolioPageProps) {
   const { locale } = await params
+  const t = await getTranslations()
   return (
     <div className="min-h-screen bg-background">
       <SkipLink />
@@ -60,16 +55,16 @@ export default async function Portfolio({ params }: PortfolioPageProps) {
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-6">
             <h1 id="hero-heading" className="font-serif text-5xl md:text-6xl font-bold text-foreground mb-4 text-balance">
-              {PERSONAL_INFO.name}
+              {t('personalInfo.name')}
             </h1>
             <p className="text-xl md:text-2xl text-accent mb-6 text-balance font-medium">
-              {PERSONAL_INFO.title}
+              {t('personalInfo.title')}
             </p>
           </div>
 
           <div className="mb-12">
             <p className="text-lg md:text-xl text-foreground max-w-3xl mx-auto leading-relaxed text-pretty">
-              {PERSONAL_INFO.shortDescription}
+              {t('personalInfo.shortDescription')}
             </p>
           </div>
 
@@ -80,7 +75,7 @@ export default async function Portfolio({ params }: PortfolioPageProps) {
               asChild
             >
               <a href="#projects" className="flex items-center justify-center gap-2">
-                View Work
+                {t('buttons.viewWork')}
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
               </a>
             </Button>
@@ -91,7 +86,7 @@ export default async function Portfolio({ params }: PortfolioPageProps) {
               asChild
             >
               <a href="#skills" className="flex items-center justify-center">
-                Learn More
+                {t('buttons.learnMore')}
               </a>
             </Button>
           </div>
@@ -104,16 +99,16 @@ export default async function Portfolio({ params }: PortfolioPageProps) {
       <section id="about" className="py-16 px-6 bg-card" aria-labelledby="about-heading">
         <div className="max-w-4xl mx-auto">
           <h2 id="about-heading" className="font-serif text-3xl md:text-4xl font-bold text-center mb-3 text-card-foreground">
-            A tech head with a business mind
+            {t('sections.aboutHeading')}
           </h2>
           <div className="w-24 h-1 bg-accent mx-auto mb-12 rounded-full"></div>
           <Card className="border-border bg-background shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
             <CardContent className="p-8">
               <div className="grid md:grid-cols-3 gap-8 mb-8">
-                {EXECUTIVE_SUMMARY.expertiseAreas.map((area) => {
+                {t.raw('executiveSummary.expertiseAreas').map((area: any, index: number) => {
                   const IconComponent = area.icon === "Code" ? Layers : area.icon === "Database" ? CircuitBoard : Users
                   return (
-                    <div key={area.title} className="text-center">
+                    <div key={index} className="text-center">
                       <div className="w-16 h-16 mx-auto mb-4 bg-card rounded-full flex items-center justify-center hover:bg-accent/20 transition-all duration-300 group">
                         <IconComponent className="w-8 h-8 text-secondary group-hover:text-accent transition-colors duration-300" />
                       </div>
@@ -125,7 +120,7 @@ export default async function Portfolio({ params }: PortfolioPageProps) {
               </div>
               <div className="text-center">
                 <p className="text-foreground leading-relaxed max-w-3xl mx-auto whitespace-pre-line">
-                  {EXECUTIVE_SUMMARY.mainText}
+                  {t('executiveSummary.mainText')}
                 </p>
               </div>
             </CardContent>
@@ -137,7 +132,7 @@ export default async function Portfolio({ params }: PortfolioPageProps) {
       <section id="projects" className="py-16 px-6" aria-labelledby="projects-heading">
         <div className="max-w-6xl mx-auto">
           <h2 id="projects-heading" className="font-serif text-3xl md:text-4xl font-bold text-center mb-3 text-foreground">
-            Featured Projects
+            {t('sections.projectsHeading')}
           </h2>
           <div className="w-24 h-1 bg-accent mx-auto mb-12 rounded-full"></div>
 
@@ -167,7 +162,7 @@ export default async function Portfolio({ params }: PortfolioPageProps) {
                     href={`/${locale}/case-studies/${project.slug}`}
                     prefetch={true}
                   >
-                    Read Case Study
+                    {t('buttons.readCaseStudy')}
                     <ExternalLink className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" aria-hidden="true" />
                   </Link>
                 </Button>
@@ -184,11 +179,11 @@ export default async function Portfolio({ params }: PortfolioPageProps) {
           {/* Leadership & Soft Skills */}
           <div id="leadership" aria-labelledby="leadership-heading">
             <h2 id="leadership-heading" className="font-serif text-3xl md:text-4xl font-bold text-center mb-3 text-card-foreground">
-              Leadership & Expertise
+              {t('sections.leadershipHeading')}
             </h2>
             <div className="w-24 h-1 bg-accent mx-auto mb-8 rounded-full"></div>
             <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
-              {LEADERSHIP_SKILLS.map((skill) => (
+              {t.raw('leadershipSkills').map((skill: string) => (
               <Badge
                   key={skill}
                 variant="outline"
@@ -203,19 +198,19 @@ export default async function Portfolio({ params }: PortfolioPageProps) {
           {/* Technical Skills */}
           <div className="mt-12" aria-labelledby="technical-skills-heading">
             <h2 id="technical-skills-heading" className="font-serif text-3xl md:text-4xl font-bold text-center mb-3 text-card-foreground">
-              Technical Skills
+              {t('sections.technicalSkillsHeading')}
             </h2>
             <div className="w-24 h-1 bg-accent mx-auto mb-12 rounded-full"></div>
 
             <div className="flex flex-wrap justify-center gap-3">
-              {TECHNICAL_SKILLS.map((skill) => (
+              {t.raw('technicalSkills').map((skill: any) => (
                 <Card key={skill.title} className="border-border bg-background flex-1 min-w-[280px] max-w-[320px] hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                 <CardHeader className="pb-4">
                     <CardTitle className="font-serif text-lg text-foreground">{skill.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="flex flex-wrap gap-2">
-                      {skill.technologies.map((tech) => (
+                      {skill.technologies.map((tech: string) => (
                         <TechnologyBadge key={tech}>{tech}</TechnologyBadge>
                       ))}
                   </div>
@@ -231,15 +226,15 @@ export default async function Portfolio({ params }: PortfolioPageProps) {
       <section id="interests" className="py-16 px-6" aria-labelledby="interests-heading">
         <div className="max-w-6xl mx-auto">
           <h2 id="interests-heading" className="font-serif text-3xl md:text-4xl font-bold text-center mb-3 text-foreground">
-            Technical Interests
+            {t('sections.interestsHeading')}
           </h2>
           <div className="w-24 h-1 bg-accent mx-auto mb-4 rounded-full"></div>
           <p className="text-center text-muted-foreground mb-12 max-w-3xl mx-auto text-pretty">
-            {TECHNICAL_INTERESTS_DESCRIPTION}
+            {t('technicalInterestsDescription')}
           </p>
 
           <div className="grid grid-cols-2 gap-8">
-            {TECHNICAL_INTERESTS.map((interest) => (
+            {t.raw('technicalInterests').map((interest: any) => (
               <Card
                 key={interest.title}
                 className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-border bg-card flex flex-col"
@@ -253,7 +248,7 @@ export default async function Portfolio({ params }: PortfolioPageProps) {
               <CardContent className="flex-1">
                   <p className="text-sm text-card-foreground leading-relaxed mb-4">{interest.content}</p>
                 <div className="flex flex-wrap gap-2">
-                    {interest.technologies.map((tech) => (
+                    {interest.technologies.map((tech: string) => (
                       <TechnologyBadge key={tech}>{tech}</TechnologyBadge>
                     ))}
                 </div>
@@ -267,13 +262,13 @@ export default async function Portfolio({ params }: PortfolioPageProps) {
       {/* Contact Section */}
       <section id="contact" className="py-16 px-6 bg-card" aria-labelledby="contact-heading">
         <div className="max-w-2xl mx-auto">
-          <h2 id="contact-heading" className="font-serif text-3xl md:text-4xl font-bold text-center mb-3 text-card-foreground">Get In Touch</h2>
+          <h2 id="contact-heading" className="font-serif text-3xl md:text-4xl font-bold text-center mb-3 text-card-foreground">{t('sections.contactHeading')}</h2>
           <div className="w-24 h-1 bg-accent mx-auto mb-12 rounded-full"></div>
           <Card className="border-border bg-background shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
             <CardContent className="p-8">
               <div className="text-center space-y-8">
                 <p className="text-lg text-muted-foreground leading-relaxed text-pretty">
-                  Whether you're looking to collaborate, discuss platform engineering challenges, or explore new opportunities—I'm here for the conversation. Let's talk!
+                  {t('sections.contactText')}
                 </p>
 
                 {/* Social Links */}

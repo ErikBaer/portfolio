@@ -6,6 +6,7 @@ import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { getCaseStudyBySlug } from "@/lib/case-studies"
 import { notFound } from "next/navigation"
+import { getTranslations } from 'next-intl/server'
 
 interface CaseStudyPageProps {
   params: Promise<{ slug: string; locale: string }>
@@ -13,6 +14,7 @@ interface CaseStudyPageProps {
 
 export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps) {
   const { slug, locale } = await params
+  const t = await getTranslations()
   const caseStudy = getCaseStudyBySlug(slug)
 
   if (!caseStudy) {
@@ -33,7 +35,7 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps
             className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors mb-8 group"
           >
             <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform" aria-hidden="true" />
-            Back to Portfolio
+            {t('caseStudies.backToPortfolio')}
           </Link>
 
           {caseStudy.title && (
@@ -47,7 +49,7 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps
       {/* Cap Section */}
       <section className="py-12 px-6 bg-card">
         <div className="max-w-4xl mx-auto">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold text-card-foreground mb-6">Summary</h2>
+          <h2 className="font-serif text-3xl md:text-4xl font-bold text-card-foreground mb-6">{t('caseStudies.summary')}</h2>
           <div className="w-24 h-1 bg-accent mb-8 rounded-full"></div>
           <p className="text-lg text-card-foreground leading-relaxed text-pretty">{caseStudy.cap}</p>
         </div>
@@ -56,7 +58,7 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps
       {/* Challenge Section */}
       <section className="py-16 px-6">
         <div className="max-w-4xl mx-auto">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-6">Challenge</h2>
+          <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-6">{t('caseStudies.challenge')}</h2>
           <div className="w-24 h-1 bg-accent mb-8 rounded-full"></div>
           <p className="text-lg text-foreground leading-relaxed text-pretty">{caseStudy.challenge}</p>
         </div>
@@ -65,7 +67,7 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps
       {/* Approach Section */}
       <section className="py-16 px-6 bg-card">
         <div className="max-w-4xl mx-auto">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold text-card-foreground mb-6">Approach</h2>
+          <h2 className="font-serif text-3xl md:text-4xl font-bold text-card-foreground mb-6">{t('caseStudies.approach')}</h2>
           <div className="w-24 h-1 bg-accent mb-8 rounded-full"></div>
           <p className="text-lg text-card-foreground leading-relaxed text-pretty whitespace-pre-line">
             {caseStudy.approach}
@@ -76,7 +78,7 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps
       {/* Outcome Section */}
       <section className="py-16 px-6">
         <div className="max-w-4xl mx-auto">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-6">Outcome</h2>
+          <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-6">{t('caseStudies.outcome')}</h2>
           <div className="w-24 h-1 bg-accent mb-8 rounded-full"></div>
           <p className="text-lg text-foreground leading-relaxed text-pretty">{caseStudy.outcome}</p>
         </div>
@@ -86,7 +88,7 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps
       <section className="py-16 px-6 bg-card">
         <div className="max-w-4xl mx-auto">
           <h2 className="font-serif text-3xl md:text-4xl font-bold text-card-foreground mb-6">
-            Technical Highlights
+            {t('caseStudies.technicalHighlights')}
           </h2>
           <div className="w-24 h-1 bg-accent mb-8 rounded-full"></div>
           <p className="text-lg text-card-foreground leading-relaxed text-pretty whitespace-pre-line">
@@ -98,7 +100,7 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps
       {/* Tags Section */}
       <section className="py-16 px-6">
         <div className="max-w-4xl mx-auto">
-          <h3 className="font-serif text-2xl md:text-3xl font-bold text-foreground mb-6">Tags</h3>
+          <h3 className="font-serif text-2xl md:text-3xl font-bold text-foreground mb-6">{t('caseStudies.tags')}</h3>
           <div className="w-24 h-1 bg-accent mb-8 rounded-full"></div>
           <div className="flex flex-wrap gap-2 mb-6">
             {caseStudy.tags.map((tag) => (
@@ -111,7 +113,7 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps
             className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors group mt-8"
           >
             <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform" aria-hidden="true" />
-            Back to Portfolio
+            {t('caseStudies.backToPortfolio')}
           </Link>
         </div>
       </section>

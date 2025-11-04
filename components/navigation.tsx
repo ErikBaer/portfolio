@@ -2,13 +2,14 @@
 
 import { Menu, X } from 'lucide-react'
 import { usePathname } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
-import { NAVIGATION, PERSONAL_INFO } from '@/lib/constants'
 
 export function Navigation() {
+  const t = useTranslations()
   const pathname = usePathname()
-  const isHomePage = pathname === '/'
+  const isHomePage = pathname === '/' || pathname.endsWith('/en') || pathname.endsWith('/de')
 
   return (
     <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border" aria-label="Main navigation">
@@ -23,14 +24,14 @@ export function Navigation() {
               }
             }}
             className="font-serif text-xl font-semibold text-accent hover:text-accent/80 transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 rounded-sm"
-            aria-label={`${PERSONAL_INFO.name} - Home`}
+            aria-label={`${t('personalInfo.name')} - Home`}
           >
-            {PERSONAL_INFO.name}
+            {t('personalInfo.name')}
           </a>
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8" role="list">
-            {NAVIGATION.items.map((item) => (
+            {t.raw('navigation.items').map((item: { label: string; href: string }) => (
               <a
                 key={item.href}
                 href={item.href}
@@ -52,10 +53,10 @@ export function Navigation() {
             </SheetTrigger>
             <SheetContent side="right" aria-label="Mobile navigation menu">
               <SheetHeader>
-                <SheetTitle>Navigation</SheetTitle>
+                <SheetTitle>{t('navigation.sheetTitle')}</SheetTitle>
               </SheetHeader>
               <nav className="flex flex-col items-center gap-6 mt-12" aria-label="Mobile navigation links">
-                {NAVIGATION.items.map((item) => (
+                {t.raw('navigation.items').map((item: { label: string; href: string }) => (
                   <a
                     key={item.href}
                     href={item.href}

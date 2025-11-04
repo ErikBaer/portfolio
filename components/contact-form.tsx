@@ -3,6 +3,7 @@
 import { useEffect, useTransition, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -19,6 +20,7 @@ import { sendContactMessage, type ContactFormState } from '@/app/actions/contact
 import { contactFormSchema, type ContactFormValues } from '@/lib/schemas'
 
 export function ContactForm() {
+  const t = useTranslations()
   const [isPending, startTransition] = useTransition()
   const [state, setState] = useState<ContactFormState>({ success: false })
 
@@ -67,10 +69,10 @@ export function ContactForm() {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>{t('form.name')}</FormLabel>
               <FormControl>
                 <Input 
-                  placeholder="Your name" 
+                  placeholder={t('form.namePlaceholder')} 
                   className="bg-card text-primary placeholder:text-secondary"
                   {...field} 
                 />
@@ -85,11 +87,11 @@ export function ContactForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>{t('form.email')}</FormLabel>
               <FormControl>
                 <Input 
                   type="email" 
-                  placeholder="your@email.com" 
+                  placeholder={t('form.emailPlaceholder')} 
                   className="bg-card text-primary placeholder:text-secondary"
                   {...field} 
                 />
@@ -104,10 +106,10 @@ export function ContactForm() {
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Message</FormLabel>
+              <FormLabel>{t('form.message')}</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Your message..."
+                  placeholder={t('form.messagePlaceholder')}
                   className="min-h-24 bg-card text-primary placeholder:text-secondary"
                   {...field}
                 />
@@ -123,18 +125,18 @@ export function ContactForm() {
           className="w-full"
         >
           {isPending ? (
-            'Sending...'
+            t('form.sending')
           ) : (
             <>
               <Send className="mr-2 h-4 w-4" />
-              Send Message
+              {t('buttons.sendMessage')}
             </>
           )}
         </Button>
 
         {state.success && (
           <p className="text-sm text-green-600 dark:text-green-400 text-center">
-            {state.message || "Message sent successfully! I'll get back to you soon."}
+            {state.message || t('form.successMessage')}
           </p>
         )}
 
