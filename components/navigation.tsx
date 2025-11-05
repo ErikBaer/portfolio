@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
 import { PERSONAL_INFO, NAVIGATION } from '@/lib/constants'
-import { useI18n } from '@/hooks/use-i18n'
+import { useI18n } from '@/components/i18n-provider'
 
 export function Navigation() {
   const pathname = usePathname()

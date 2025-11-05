@@ -17,8 +17,10 @@ import {
 import { Send } from 'lucide-react'
 import { sendContactMessage, type ContactFormState } from '@/app/actions/contact'
 import { contactFormSchema, type ContactFormValues } from '@/lib/schemas'
+import { useI18n } from '@/components/i18n-provider'
 
 export function ContactForm() {
+  const { t } = useI18n()
   const [isPending, startTransition] = useTransition()
   const [state, setState] = useState<ContactFormState>({ success: false })
 
@@ -67,10 +69,10 @@ export function ContactForm() {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>{t('formName')}</FormLabel>
               <FormControl>
                 <Input 
-                  placeholder="Your name" 
+                  placeholder={t('formPlaceholderName')} 
                   className="bg-card text-primary placeholder:text-secondary"
                   {...field} 
                 />
@@ -85,11 +87,11 @@ export function ContactForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>{t('formEmail')}</FormLabel>
               <FormControl>
                 <Input 
                   type="email" 
-                  placeholder="your@email.com" 
+                  placeholder={t('formPlaceholderEmail')} 
                   className="bg-card text-primary placeholder:text-secondary"
                   {...field} 
                 />
@@ -104,10 +106,10 @@ export function ContactForm() {
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Message</FormLabel>
+              <FormLabel>{t('formMessage')}</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Your message..."
+                  placeholder={t('formPlaceholderMessage')}
                   className="min-h-24 bg-card text-primary placeholder:text-secondary"
                   {...field}
                 />
@@ -127,7 +129,7 @@ export function ContactForm() {
           ) : (
             <>
               <Send className="mr-2 h-4 w-4" />
-              Send Message
+              {t('sendMessage')}
             </>
           )}
         </Button>
