@@ -67,8 +67,8 @@ export default async function LocaleLayout({
   }
 
   // Providing all messages to the client side
-  // Use getMessages() which automatically uses the locale from request context
-  const messages = await getMessages()
+  // Use getMessages() with locale parameter to ensure correct locale is used
+  const messages = await getMessages({ locale })
 
   return (
     <NextIntlClientProvider messages={messages}>

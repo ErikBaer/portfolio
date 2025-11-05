@@ -42,7 +42,7 @@ interface PortfolioPageProps {
 
 export default async function Portfolio({ params }: PortfolioPageProps) {
   const { locale } = await params
-  const t = await getTranslations()
+  const t = await getTranslations({ locale })
   return (
     <div className="min-h-screen bg-background">
       <SkipLink />
