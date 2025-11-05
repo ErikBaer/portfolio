@@ -8,7 +8,7 @@
 export type Locale = 'de' | 'en'
 
 const COOKIE_NAME = 'NEXT_LOCALE'
-const DEFAULT_LOCALE: Locale = 'de'
+const DEFAULT_LOCALE: Locale = 'en'
 
 /**
  * Setzt die Sprache im Cookie

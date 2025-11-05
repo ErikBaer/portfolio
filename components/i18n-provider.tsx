@@ -1,13 +1,17 @@
 'use client'
 
-import { createContext, useContext, useState, useEffect, type ReactNode } from 'react'
+import { createContext, useContext, useState, useEffect, useMemo, type ReactNode } from 'react'
 import { getLocaleCookie, setLocaleCookie, type Locale } from '@/lib/i18n-cookie'
-import { translations } from '@/lib/translations'
+import { getConstants } from '@/lib/constants'
+
+// Type für die Constants-Struktur (basierend auf constants.de/en)
+type ConstantsType = ReturnType<typeof getConstants>
 
 type I18nContextType = {
   locale: Locale
-  t: (key: keyof typeof translations.de) => string
+  t: (key: keyof ConstantsType['UI']) => string
   changeLocale: (locale: Locale) => void
+  constants: ConstantsType
 }
 
 const I18nContext = createContext<I18nContextType | undefined>(undefined)
@@ -16,24 +20,26 @@ const I18nContext = createContext<I18nContextType | undefined>(undefined)
  * i18n Provider - teilt den locale State zwischen allen Komponenten
  */
 export function I18nProvider({ children }: { children: ReactNode }) {
-  // Initial immer 'de' (stimmt mit SSR überein)
-  const [locale, setLocale] = useState<Locale>('de')
-  const [mounted, setMounted] = useState(false)
+  // Initial immer 'en' (stimmt mit SSR Default überein, um Hydration-Mismatch zu vermeiden)
+  const [locale, setLocale] = useState<Locale>('en')
 
   // Nach dem Mount: Cookie lesen und ggf. locale setzen
   useEffect(() => {
-    setMounted(true)
     const cookieLocale = getLocaleCookie()
     setLocale(cookieLocale)
   }, [])
 
+  // Constants basierend auf aktueller Locale (memoized für Performance)
+  // locale ist bereits initial 'en', daher kein mounted Check nötig
+  const constants = useMemo(() => {
+    return getConstants(locale)
+  }, [locale])
+
   /**
-   * Übersetzung für einen Key
+   * Übersetzung für einen UI-Key
    */
-  const t = (key: keyof typeof translations.de): string => {
-    // Vor dem Mount: Immer 'de' (verhindert Hydration-Mismatch)
-    const currentLocale = mounted ? locale : 'de'
-    return translations[currentLocale][key]
+  const t = (key: keyof ConstantsType['UI']): string => {
+    return constants.UI[key]
   }
 
   /**
@@ -47,9 +53,10 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   return (
     <I18nContext.Provider
       value={{
-        locale: mounted ? locale : 'de',
+        locale, // locale ist bereits initial 'en'
         t,
         changeLocale,
+        constants,
       }}
     >
       {children}

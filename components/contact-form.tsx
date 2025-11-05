@@ -18,9 +18,19 @@ import { Send } from 'lucide-react'
 import { sendContactMessage, type ContactFormState } from '@/app/actions/contact'
 import { contactFormSchema, type ContactFormValues } from '@/lib/schemas'
 import { useI18nSafe } from '@/lib/use-i18n-safe'
+import { useIsMounted } from '@/lib/hooks/use-is-mounted'
 
+/**
+ * Contact Form Component
+ * 
+ * WICHTIG: Wird nur Client-side gerendert (nach Mount), um Hydration-Mismatches zu vermeiden.
+ * React Hook Form generiert IDs beim SSR anders als beim Client, was zu Hydration-Fehlern führt.
+ * 
+ * Lösung: Component rendert erst nach dem Mount, zeigt vorher einen Skeleton-Loader.
+ */
 export function ContactForm() {
   const { t } = useI18nSafe()
+  const isMounted = useIsMounted()
   const [isPending, startTransition] = useTransition()
   const [state, setState] = useState<ContactFormState>({ success: false })
 
@@ -59,6 +69,19 @@ export function ContactForm() {
       const result = await sendContactMessage(null, values)
       setState(result)
     })
+  }
+
+  // Verhindere Hydration-Mismatch: Form nur nach Mount rendern
+  // React Hook Form generiert IDs unterschiedlich auf Server vs Client
+  if (!isMounted) {
+    return (
+      <div className="space-y-6 max-w-md mx-auto" aria-label="Loading contact form">
+        <div className="h-4 bg-accent/20 rounded animate-pulse" />
+        <div className="h-4 bg-accent/20 rounded animate-pulse w-3/4" />
+        <div className="h-24 bg-accent/20 rounded animate-pulse" />
+        <div className="h-10 bg-accent/20 rounded animate-pulse" />
+      </div>
+    )
   }
 
   return (

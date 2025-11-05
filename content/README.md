@@ -1,66 +1,65 @@
 # Content Management
 
-Dieses Verzeichnis enthält die Markdown-basierten Content-Dateien für das Portfolio.
+Dieses Verzeichnis kann für zukünftige Content-Dateien verwendet werden.
 
-## constants-content.md
+## Aktuelle Content-Struktur
 
-Diese Datei enthält alle Textinhalte, die normalerweise in `lib/constants.ts` hardcodiert wären. Du kannst hier in Ruhe alle Texte bearbeiten, ohne TypeScript-Code anzufassen.
+Alle Content-Werte werden jetzt direkt in TypeScript-Dateien verwaltet:
 
-### Automatische Generierung
+### Locale-basierte Constants
 
-Das Script `scripts/generate-constants.ts` parst diese Markdown-Datei und generiert daraus automatisch `lib/constants.ts`.
+- **`lib/constants.de.ts`** - Single Source of Truth für alle deutschen Inhalte
+- **`lib/constants.en.ts`** - Single Source of Truth für alle englischen Inhalte
+- **`lib/constants.ts`** - Zentrale Datei, die je nach Locale die richtige Datei lädt
+
+### Struktur
+
+Beide Locale-Dateien enthalten die gleichen Keys mit unterschiedlichen Werten:
+
+- `PERSONAL_INFO` - Persönliche Informationen
+- `METADATA` - SEO-Metadaten
+- `NAVIGATION` - Navigationsstruktur
+- `CONTACT_INFO` - Kontaktinformationen
+- `EXECUTIVE_SUMMARY` - Executive Summary und Expertise Areas
+- `TECHNICAL_SKILLS` - Technische Kompetenzen
+- `LEADERSHIP_SKILLS` - Leadership Skills
+- `TECHNICAL_INTERESTS` - Technische Interessen
+- `TECHNICAL_INTERESTS_DESCRIPTION` - Beschreibung der Interessen
+- `UI` - UI-Übersetzungen (Buttons, Labels, Headings)
 
 ### Verwendung
 
-#### Development mit Hot Reload
+#### In Client Components
 
-```bash
-npm run dev
+```typescript
+import { useI18nSafe } from '@/lib/use-i18n-safe'
+
+export function MyComponent() {
+  const { constants, t } = useI18nSafe()
+  
+  // Verwende constants für Content
+  const { PERSONAL_INFO, TECHNICAL_SKILLS } = constants
+  
+  // Verwende t() für UI-Übersetzungen
+  const heading = t('headingAbout')
+}
 ```
 
-Dieser Befehl:
-- Generiert `constants.ts` einmal am Start
-- Startet einen Watch-Modus, der die MD-Datei überwacht
-- Startet Next.js Dev-Server
-- **Hot Reload funktioniert**: Änderungen an `constants-content.md` generieren automatisch neue `constants.ts`, Next.js lädt dann automatisch neu
+#### In Server Components
 
-#### Einmalige Generierung
+```typescript
+import { PERSONAL_INFO, CONTACT_INFO } from '@/lib/constants'
 
-```bash
-npm run generate-constants
+// Verwendet automatisch die Default-Locale (en)
+export function MyServerComponent() {
+  return <div>{PERSONAL_INFO.name}</div>
+}
 ```
-
-Oder direkt:
-```bash
-npx tsx scripts/generate-constants.ts
-```
-
-#### Build
-
-```bash
-npm run build
-```
-
-Führt die Generierung automatisch vor dem Build aus.
-
-#### Development ohne Watch (falls Probleme)
-
-```bash
-npm run dev:simple
-```
-
-Generiert einmal am Start, aber kein automatisches Watch.
-
-### Format
-
-- Alle Textinhalte stehen zwischen ``` Code-Blöcken
-- Die Struktur (Überschriften, Labels) muss beibehalten werden
-- Technologies sind kommagetrennt (z.B. "Tech1, Tech2, Tech3")
 
 ### Vorteile
 
-✅ **Content-First**: Bearbeite Inhalte in Markdown statt TypeScript  
-✅ **Build-Time Generierung**: TypeScript-Code wird zur Build-Zeit erzeugt  
-✅ **Type-Safe**: Die generierte `constants.ts` bleibt vollständig typisiert  
-✅ **Automatisch**: `npm run build` generiert automatisch vor dem Build  
-
+✅ **Direkte TypeScript-Dateien**: Keine Generierung, keine Build-Steps  
+✅ **Type-Safe**: Vollständige TypeScript-Unterstützung  
+✅ **Locale-basiert**: Separate Dateien für jede Sprache  
+✅ **Einfache Wartung**: Direkt bearbeitbar, keine Markdown-Parsing  
+✅ **Single Source of Truth**: Jede Locale hat ihre eigene Datei  

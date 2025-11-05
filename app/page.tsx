@@ -15,15 +15,6 @@ import { Suspense } from "react"
 import { ViewWorkButton } from "@/components/view-work-button"
 import { LearnMoreButton } from "@/components/learn-more-button"
 import { useI18nSafe } from "@/lib/use-i18n-safe"
-import {
-  PERSONAL_INFO,
-  FEATURED_PROJECTS,
-  TECHNICAL_SKILLS,
-  LEADERSHIP_SKILLS,
-  TECHNICAL_INTERESTS,
-  TECHNICAL_INTERESTS_DESCRIPTION,
-  EXECUTIVE_SUMMARY,
-} from "@/lib/constants"
 
 /**
  * Code Splitting: ContactForm is lazy-loaded since it's only needed
@@ -48,7 +39,16 @@ const ContactForm = dynamic(
 )
 
 export default function Portfolio() {
-  const { t } = useI18nSafe()
+  const { t, constants } = useI18nSafe()
+  const {
+    PERSONAL_INFO,
+    FEATURED_PROJECTS,
+    TECHNICAL_SKILLS,
+    LEADERSHIP_SKILLS,
+    TECHNICAL_INTERESTS,
+    TECHNICAL_INTERESTS_DESCRIPTION,
+    EXECUTIVE_SUMMARY,
+  } = constants
   
   return (
     <div className="min-h-screen bg-background">

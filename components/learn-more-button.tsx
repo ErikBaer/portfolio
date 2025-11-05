@@ -1,22 +1,14 @@
 'use client'
 
-import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { useI18nSafe } from "@/lib/use-i18n-safe"
 
 /**
  * "Learn More" Button mit i18n
+ * Der I18nProvider stellt sicher, dass vor dem Mount EN verwendet wird (SSR Default)
  */
 export function LearnMoreButton() {
   const { t } = useI18nSafe()
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  // Während des ersten Renders (vor Mount): Immer "Mehr erfahren" (DE)
-  const buttonText = mounted ? t('learnMore') : 'Mehr erfahren'
 
   return (
     <Button
@@ -26,7 +18,7 @@ export function LearnMoreButton() {
       asChild
     >
       <a href="#skills" className="flex items-center justify-center">
-        {buttonText}
+        {t('learnMore')}
       </a>
     </Button>
   )
