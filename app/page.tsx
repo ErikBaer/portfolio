@@ -14,7 +14,7 @@ import dynamic from "next/dynamic"
 import { Suspense } from "react"
 import { ViewWorkButton } from "@/components/view-work-button"
 import { LearnMoreButton } from "@/components/learn-more-button"
-import { useI18n } from "@/components/i18n-provider"
+import { useI18nSafe } from "@/lib/use-i18n-safe"
 import {
   PERSONAL_INFO,
   FEATURED_PROJECTS,
@@ -48,7 +48,7 @@ const ContactForm = dynamic(
 )
 
 export default function Portfolio() {
-  const { t } = useI18n()
+  const { t } = useI18nSafe()
   
   return (
     <div className="min-h-screen bg-background">

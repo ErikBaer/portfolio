@@ -2,13 +2,13 @@
 
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { useI18n } from "@/components/i18n-provider"
+import { useI18nSafe } from "@/lib/use-i18n-safe"
 
 /**
  * "Learn More" Button mit i18n
  */
 export function LearnMoreButton() {
-  const { t } = useI18n()
+  const { t } = useI18nSafe()
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {

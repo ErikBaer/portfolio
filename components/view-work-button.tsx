@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
-import { useI18n } from "@/components/i18n-provider"
+import { useI18nSafe } from "@/lib/use-i18n-safe"
 
 /**
  * "View Work" Button mit i18n
@@ -13,7 +13,7 @@ import { useI18n } from "@/components/i18n-provider"
  * um Hydration-Mismatch zu vermeiden. Erst nach Mount die Cookie-Sprache verwenden.
  */
 export function ViewWorkButton() {
-  const { t } = useI18n()
+  const { t } = useI18nSafe()
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {

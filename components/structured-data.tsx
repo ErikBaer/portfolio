@@ -1,7 +1,8 @@
 import { PERSONAL_INFO, CONTACT_INFO } from '@/lib/constants'
+import { env } from '@/lib/env'
 
 export function StructuredData() {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://erikbaer.dev'
+  const siteUrl = env.NEXT_PUBLIC_SITE_URL || 'https://erikbaer.dev'
   
   const personSchema = {
     '@context': 'https://schema.org',

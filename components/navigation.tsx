@@ -6,22 +6,7 @@ import { usePathname } from 'next/navigation'
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
 import { PERSONAL_INFO, NAVIGATION } from '@/lib/constants'
-import { useI18n } from '@/components/i18n-provider'
-import { translations } from '@/lib/translations'
-
-// Fallback-Funktion wenn I18nProvider nicht verfügbar ist
-function useI18nSafe() {
-  try {
-    return useI18n()
-  } catch {
-    // Fallback wenn Provider nicht verfügbar (z.B. in not-found.tsx)
-    return {
-      locale: 'de' as const,
-      changeLocale: () => {},
-      t: (key: keyof typeof translations.de) => translations.de[key],
-    }
-  }
-}
+import { useI18nSafe } from '@/lib/use-i18n-safe'
 
 export function Navigation() {
   const pathname = usePathname()

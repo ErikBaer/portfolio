@@ -8,6 +8,7 @@ import "./globals.css"
 import { METADATA as METADATA_CONFIG, PERSONAL_INFO, CONTACT_INFO } from "@/lib/constants"
 import { StructuredData } from "@/components/structured-data"
 import { RemoveVercelBadge } from "@/components/remove-vercel-badge"
+import { I18nProvider } from "@/components/i18n-provider"
 
 /**
  * Font configuration with performance optimizations:
@@ -99,9 +100,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable} ${playfair.variable} antialiased`}>
-        <RemoveVercelBadge />
-        <StructuredData />
-        <Suspense fallback={null}>{children}</Suspense>
+        <I18nProvider>
+          <RemoveVercelBadge />
+          <StructuredData />
+          <Suspense fallback={null}>{children}</Suspense>
+        </I18nProvider>
       </body>
     </html>
   )

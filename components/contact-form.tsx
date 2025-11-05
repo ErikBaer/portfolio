@@ -17,10 +17,10 @@ import {
 import { Send } from 'lucide-react'
 import { sendContactMessage, type ContactFormState } from '@/app/actions/contact'
 import { contactFormSchema, type ContactFormValues } from '@/lib/schemas'
-import { useI18n } from '@/components/i18n-provider'
+import { useI18nSafe } from '@/lib/use-i18n-safe'
 
 export function ContactForm() {
-  const { t } = useI18n()
+  const { t } = useI18nSafe()
   const [isPending, startTransition] = useTransition()
   const [state, setState] = useState<ContactFormState>({ success: false })
 
