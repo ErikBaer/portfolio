@@ -1,3 +1,7 @@
+import createNextIntlPlugin from 'next-intl/plugin'
+
+const withNextIntl = createNextIntlPlugin()
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {
@@ -12,4 +16,4 @@ const nextConfig = {
   // The package is still installed but not used to avoid any automatic injection
 }
 
-export default nextConfig
+export default withNextIntl(nextConfig)
