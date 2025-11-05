@@ -54,11 +54,11 @@ export function Navigation() {
               </a>
             ))}
             
-            {/* Visual Separator */}
-            <div className="h-5 w-px bg-border" aria-hidden="true" />
+            {/* Visual Separator - Hidden */}
+            <div className="hidden h-5 w-px bg-border" aria-hidden="true" />
             
-            {/* Language Switcher */}
-            <div className="flex items-center gap-0.5 border rounded-md p-0.5">
+            {/* Language Switcher - Hidden */}
+            <div className="hidden flex items-center gap-0.5 border rounded-md p-0.5">
               <Button
                 variant={locale === 'de' ? 'default' : 'ghost'}
                 size="sm"
@@ -104,11 +104,11 @@ export function Navigation() {
                   </a>
                 ))}
                 
-                {/* Visual Separator */}
-                <div className="w-full h-px bg-border my-4" aria-hidden="true" />
+                {/* Visual Separator - Hidden */}
+                <div className="hidden w-full h-px bg-border my-4" aria-hidden="true" />
                 
-                {/* Mobile Language Switcher */}
-                <div className="flex items-center justify-center gap-1 border rounded-md p-1 w-full">
+                {/* Mobile Language Switcher - Hidden */}
+                <div className="hidden flex items-center justify-center gap-1 border rounded-md p-1 w-full">
                   <Button
                     variant={locale === 'de' ? 'default' : 'ghost'}
                     size="sm"
