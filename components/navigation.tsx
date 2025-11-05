@@ -7,11 +7,26 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/co
 import { Button } from '@/components/ui/button'
 import { PERSONAL_INFO, NAVIGATION } from '@/lib/constants'
 import { useI18n } from '@/components/i18n-provider'
+import { translations } from '@/lib/translations'
+
+// Fallback-Funktion wenn I18nProvider nicht verfügbar ist
+function useI18nSafe() {
+  try {
+    return useI18n()
+  } catch {
+    // Fallback wenn Provider nicht verfügbar (z.B. in not-found.tsx)
+    return {
+      locale: 'de' as const,
+      changeLocale: () => {},
+      t: (key: keyof typeof translations.de) => translations.de[key],
+    }
+  }
+}
 
 export function Navigation() {
   const pathname = usePathname()
   const isHomePage = pathname === '/'
-  const { locale, changeLocale, t } = useI18n()
+  const { locale, changeLocale, t } = useI18nSafe()
   const [mounted, setMounted] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
