@@ -1,7 +1,7 @@
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
-import { locales, defaultLocale } from '@/i18n'
+import { locales, defaultLocale } from '@/i18n/request'
 import type { Metadata } from 'next'
 import { env } from '@/lib/env'
 

@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 import { getAllCaseStudies } from '@/lib/case-studies'
 import { env } from '@/lib/env'
-import { locales } from '@/i18n'
+import { locales } from '@/i18n/request'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const siteUrl = env.NEXT_PUBLIC_SITE_URL
@@ -20,17 +20,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
         languages: Object.fromEntries(
           locales.map((l) => [l, `${baseUrl}/${l}`])
         ),
-      },
+    },
     })
 
     // Case Studies for each locale
-    const caseStudies = getAllCaseStudies()
-    caseStudies.forEach((study) => {
-      routes.push({
+  const caseStudies = getAllCaseStudies()
+  caseStudies.forEach((study) => {
+    routes.push({
         url: `${baseUrl}/${locale}/case-studies/${study.slug}`,
-        lastModified: new Date(),
-        changeFrequency: 'monthly',
-        priority: 0.8,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
         alternates: {
           languages: Object.fromEntries(
             locales.map((l) => [`${baseUrl}/${l}/case-studies/${study.slug}`])

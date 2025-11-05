@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { defaultLocale } from '@/i18n'
+import { defaultLocale } from '@/i18n/request'
 
 export default function NotFound() {
   return (
