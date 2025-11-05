@@ -187,9 +187,47 @@
     "linkedin": "https://www.linkedin.com/in/erik-baer/",
     "github": "https://github.com/ErikBaer"
   },
-  "navigation": {},
-  "buttons": {},
-  "sections": {},
-  "form": {},
-  "caseStudies": {}
+  "navigation": {
+    "items": [
+      { "label": "About", "href": "#about" },
+      { "label": "Projects", "href": "#projects" },
+      { "label": "Skills", "href": "#skills" },
+      { "label": "Interests", "href": "#interests" },
+      { "label": "Contact", "href": "#contact" }
+    ],
+    "sheetTitle": "Navigation"
+  },
+  "buttons": {
+    "viewWork": "View My Work",
+    "learnMore": "Learn More",
+    "sendMessage": "Send Message",
+    "readCaseStudy": "Read Case Study"
+  },
+  "sections": {
+    "aboutHeading": "About Me",
+    "projectsHeading": "Featured Projects",
+    "leadershipHeading": "Leadership & Expertise",
+    "technicalSkillsHeading": "Technical Skills",
+    "interestsHeading": "Technical Interests",
+    "contactHeading": "Get In Touch",
+    "contactText": "I'm always open to discussing new opportunities, interesting projects, or just having a chat about technology and innovation. Feel free to reach out!"
+  },
+  "form": {
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "email": "Email",
+    "emailPlaceholder": "your.email@example.com",
+    "message": "Message",
+    "messagePlaceholder": "Your message...",
+    "sending": "Sending...",
+    "successMessage": "Thank you! Your message has been sent successfully."
+  },
+  "caseStudies": {
+    "backToPortfolio": "Back to Portfolio",
+    "summary": "Summary",
+    "challenge": "Challenge",
+    "solution": "Solution",
+    "results": "Results",
+    "technologies": "Technologies"
+  }
 }
