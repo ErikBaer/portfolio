@@ -77,7 +77,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   {
     slug: "financial-services-cloud-migration",
     title: "Financial Marketplace Cloud Migration",
-    description: "Zero-downtime migration to hybrid cloud architecture for mission-critical financial marketplace",
+    description: "Zero-downtime migration for mission-critical financial marketplace",
     content:
       "A financial marketplace needed to modernize infrastructure while maintaining 24/7 availability for mission-critical transactions. I architected a strategic hybrid migration combining bare-metal infrastructure for low-latency trading systems with cloud elasticity and distributed custom storage solutions.",
     cap: "I led the technical migration of an established financial marketplace to a hybrid bare-metal and high-availability cloud architecture. The migration strategy balanced stringent performance requirements with scalability needs, leveraging specialized IBM Storage solutions for mission-critical workloads while enabling cloud flexibility for dynamic services. The zero-downtime approach, built entirely on Infrastructure as Code, transformed legacy constraints into a modern, compliant, and scalable foundation.",
