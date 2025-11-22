@@ -137,7 +137,7 @@ export default function Portfolio() {
                 </CardTitle>
                   <CardDescription className="text-secondary">{project.description}</CardDescription>
               </CardHeader>
-              <CardContent className="flex-1">
+              <CardContent className="flex-1 hidden md:block">
                   <p className="text-sm text-card-foreground leading-relaxed mb-4">{project.content}</p>
                 <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech) => (
@@ -145,7 +145,7 @@ export default function Portfolio() {
                     ))}
                 </div>
               </CardContent>
-              <CardFooter className="mt-auto">
+              <CardFooter className="md:mt-auto">
                 <Button variant="link" className="group/btn p-0 h-auto text-accent hover:text-accent/80 font-medium" asChild>
                   <Link 
                     href={`/case-studies/${project.slug}`}
@@ -234,7 +234,7 @@ export default function Portfolio() {
                 </CardTitle>
                   <CardDescription className="text-secondary">{interest.description}</CardDescription>
               </CardHeader>
-              <CardContent className="flex-1">
+              <CardContent className="flex-1 hidden md:block">
                   <p className="text-sm text-card-foreground leading-relaxed mb-4">{interest.content}</p>
                 <div className="flex flex-wrap gap-2">
                     {interest.technologies.map((tech) => (
