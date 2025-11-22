@@ -125,7 +125,7 @@ export default function Portfolio() {
           </h2>
           <div className="w-24 h-1 bg-accent mx-auto mb-12 rounded-full"></div>
 
-          <div className="grid grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {FEATURED_PROJECTS.map((project) => (
               <Card
                 key={project.slug}
@@ -222,7 +222,7 @@ export default function Portfolio() {
             {TECHNICAL_INTERESTS_DESCRIPTION}
           </p>
 
-          <div className="grid grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {TECHNICAL_INTERESTS.map((interest) => (
               <Card
                 key={interest.title}
