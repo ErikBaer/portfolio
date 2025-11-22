@@ -9,7 +9,7 @@ import { getFeaturedProjects } from "./case-studies"
 export const PERSONAL_INFO = {
   name: "Erik Baer",
   title: "Platform Lead & Solution Architect",
-  shortDescription: "As an experienced Cloud Developer and Enterprise Solutions Architect with a background in Strategic Management, I drive the transformation of enterprise IT infrastructure through strategic platform engineering. I enable teams and architect powerful developer platforms that unlock productivity, reduce time-to-market, and drive measurable business value for Fortune 500 companies across various industries like Finance, Healthcare, Automotive and Manufacturing.",
+  shortDescription: "I design and evolve platform ecosystems that reduce complexity, strengthen engineering workflows, and enable teams to focus on high-impact product work. My approach combines hands-on engineering with a strategic understanding of how organisations shape and govern their technology landscape. This enables teams to align around clear principles and sustainable delivery practices, creating long-term value across the organisation.",
   availability: "Available for new opportunities",
 } as const
 
@@ -51,7 +51,7 @@ export const EXECUTIVE_SUMMARY = {
     },
     {
       title: "Cloud Architecture",
-      description: "Designing hybrid and multi-cloud environments with focus on automation and best practices",
+      description: "Designing hybrid and multi-cloud solutions with focus on automation and technical excellence",
       icon: "Database",
     },
     {
