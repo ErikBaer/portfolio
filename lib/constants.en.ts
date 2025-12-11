@@ -9,7 +9,7 @@ import { getFeaturedProjects } from "./case-studies"
 export const PERSONAL_INFO = {
   name: "Erik Baer",
   title: "Platform Lead & Solution Architect",
-  shortDescription: "I design and evolve platform ecosystems that reduce complexity, strengthen engineering workflows, and enable teams to focus on high-impact product work. My approach combines hands-on engineering with a strategic understanding of how organisations shape and govern their technology landscape. This enables teams to align around clear principles and sustainable delivery practices, creating long-term value across the organisation.",
+  shortDescription: "I design and evolve cloud-native platform ecosystems that reduce complexity, strengthen engineering workflows, and enable teams to focus on high-impact product work. My approach combines hands-on engineering with a strategic understanding of how organisations shape and govern their technology landscape. This enables teams to align around clear principles and sustainable delivery practices, creating long-term value across the organisation.",
   availability: "Available for new opportunities",
 } as const
 
@@ -67,33 +67,105 @@ export const EXECUTIVE_SUMMARY = {
 export const TECHNICAL_SKILLS = [
   {
     title: "Cloud Development",
-    technologies: ["MS Azure","AWS","IBM Cloud","Multi-Cloud","Hybrid Cloud","Managed Services","Serverless","Javascript","Python","Go","Bash"],
+    technologies: [
+      "Microsoft Azure",
+      "AWS",
+      "Cloud-Native",
+      "Hybrid Cloud",
+      "Managed Services",
+      "Serverless",
+      "Linux",
+      "Docker",
+      "Go",
+      "Python",
+      "Bash",
+      "JavaScript",
+    ],
   },
   {
     title: "Platform Engineering",
-    technologies: ["Kubernetes","Service Mesh","Istio","Helm","Kustomize","Docker","Backstage","Humanitec","ELK","Grafana","DataDog","Opentrace"],
+    technologies: [
+      "Kubernetes (AKS/EKS)",
+      "Helm",
+      "Kustomize",
+      "Istio",
+      "Backstage",
+      "Prometheus",
+      "Grafana",
+      "ELK",
+      "OpenTelemetry",
+      "DataDog"
+    ],
   },
   {
-    title: "Continuous Delivery",
-    technologies: ["Infrastructure as Code","Terraform","Continuous Integration","GitLab CI","Github Actions","Azure DevOps","Argo CD","Circle CI","TDD"],
+    title: "Automation & CI/CD",
+    technologies: [
+      "Terraform",
+      "CI/CD",
+      "GitOps (Argo CD)",
+      "GitHub Actions",
+      "GitLab CI",
+      "Policy as Code",
+      "TDD",
+      "Quality Gates",
+    ],
   },
   {
     title: "Architecture & Design",
-    technologies: ["System Architecture","API-Design","Domain Driven Design","Landing Zones","Well-Architected Framework","IoT","Automation","Product Thinking","PaaP"],
+    technologies: [
+      "Cloud Architecture",
+      "Platform Architecture",
+      "API Design",
+      "DDD",
+      "Landing Zones",
+      "Networking",
+      "Event-Driven",
+      "IoT",
+      "Platform as a Product",
+    ],
   },
   {
-    title: "Security & Compliance",
-    technologies: ["Zero-Trust","Least Privilege","Multi-Account","Threat Modelling","OAuth","Kyverno","OWASP","OPA","EntraAD","FinOps","GreenOps"],
+    title: "Security & Governance",
+    technologies: [
+      "DevSecOps",
+      "Zero Trust",
+      "Least Privilege",
+      "IAM",
+      "Multi-Account",
+      "OAuth / OIDC",
+      "OPA",
+      "Kyverno",
+      "Entra ID",
+      "FinOps",
+      "Container Security",
+    ],
   },
   {
-    title: "Data & Artificial Intelligence",
-    technologies: ["Deep Reinforcment Learning","MLOps","GenAI","Agentic Development","Multi-Agents","Fine-tuning","Data Mesh","Data Lake","SQL","Predictive Analytics"],
-  }
-] as const
+    title: "Data & AI",
+    technologies: [
+      "GenAI",
+      "Agentic AI",
+      "MLOps",
+      "Predictive Analytics",
+      "Reinforcement Learning",
+      "SQL",
+      "Data Lake",
+    ],
+  },
+] as const;
 
-// Leadership & Expertise Skills
-export const LEADERSHIP_SKILLS = ["Technical Leadership","Stakeholder Management","Digital Transformation","Enterprise Modernisation","Team Mentoring","Cross-functional Collaboration","Performance Optimization","Scalability Planning","Cost Optimization","Migration Strategy"] as const
-
+export const LEADERSHIP_SKILLS = [
+  "Technical Leadership",
+  "Platform Strategy",
+  "Cloud Strategy",
+  "Stakeholder Management",
+  "Team Mentoring",
+  "Enterprise Modernisation",
+  "Migration Strategy",
+  "Cross-Functional Collaboration",
+  "Scalability Planning",
+  "Cost Optimisation (FinOps)",
+] as const;
 // Technical Interests Section Description
 export const TECHNICAL_INTERESTS_DESCRIPTION = "Beyond my professional work, I explore cutting-edge technologies and research areas that push the boundaries of what's possible at the intersection of Modern Software Engineering, effective Infrastructure Automation and Artificial Intelligence." as const
 
